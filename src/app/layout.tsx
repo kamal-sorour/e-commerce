@@ -29,23 +29,6 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-      try {
-        let theme = localStorage.getItem('theme') || 'system';
-        if (theme === 'system') {
-          let systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          document.documentElement.classList.add(systemTheme);
-        } else {
-          document.documentElement.classList.add(theme);
-        }
-      } catch (_) {}
-    `,
-          }}
-        />
-      </head>
       <body className="antialiased"> 
          <Navbar />
         {children}

@@ -121,7 +121,7 @@ const pathname = usePathname();
               <NavigationMenuList>
                 {mainLinks.map((link) => (
                   <NavigationMenuItem key={link.href}>
-                    <Link href={link.href} legacyBehavior passHref>
+                    <Link href={link.href} passHref>
                       <NavigationMenuLink className={cn(
                         navigationMenuTriggerStyle(),
                         "bg-transparent hover:text-green-600 dark:hover:text-green-400",

@@ -20,7 +20,7 @@ export default async function Categories() {
 
         {/* تعديل الـ Grid ليكون متجاوب بشكل أفضل على الموبايل والتابلت */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
-          {categories.map((category) => (
+          {categories?.map((category) => (
             <Link
               key={category?._id}
               href={`/categories/${category?._id}`}

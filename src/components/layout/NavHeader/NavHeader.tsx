@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, Gift, Truck } from 'lucide-react';
+import { Mail, Phone, Gift, Truck, Link } from 'lucide-react';
 import { Separator } from "@/components/ui/separator";
 
 function NavHeader() {

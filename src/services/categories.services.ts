@@ -4,22 +4,16 @@ import { fetchApi } from "./api";
 // Get all categories
 export async function getAllCategories(): Promise<CategoryType[]> {
   try {
-    const res = await fetchApi(`/categories`, {
+    const res = await fetchApi(`/api/v1/categories`, {
       next: {
         revalidate: 60,
         tags: ['categories'],
       },
     });
 
-    if (!res.ok) {
-      console.error('Error fetching categories:', res);
-      throw new Error(`Failed to fetch categories: ${res.status}`);
-    }
+    console.log('Fetched categories:', res);
 
-    const finalRes = await res.json();
-    console.log('Fetched categories:', finalRes);
-
-    return finalRes.data;
+    return res.data.data;
   } catch (error) {
     console.error('Error fetching categories:', error);
     return [];

@@ -2,7 +2,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://ecommerce.rout
 
 export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
   const url = `${BASE_URL}${endpoint}`;
-  
+
   const response = await fetch(url, {
     ...options,
     headers: {
@@ -11,11 +11,20 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
     },
   });
 
-  const data = await response.json();
+  let data;
 
-  if (!response.ok) {
-    throw new Error(data.message || 'حدث خطأ أثناء جلب البيانات');
+  try {
+    data = await response.json();
+  } catch {
+    data = null;
   }
 
-  return data;
+  if (!response.ok) {
+    throw new Error(data?.message || 'حدث خطأ أثناء جلب البيانات');
+  }
+
+  return {
+    data,
+    status: response.status,
+  };
 };
