@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import YassifyBanner from "@/components/shared/YassifyBanner/YassifyBanner";
+import { useEffect, useState } from "react";
 
 const footerLinks = {
   shop: [
@@ -67,7 +68,12 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const theme = localStorage.getItem("theme");
+  const [theme, setTheme] = useState<string | null>(null);
+
+  // ✅ localStorage fix
+  useEffect(() => {
+    setTheme(localStorage.getItem("theme"));
+  }, []);
   return (
     <TooltipProvider>
       <YassifyBanner variant={theme === "dark" ? "multicolor" : "emerald"} />
@@ -86,7 +92,8 @@ export default function Footer() {
                     loading="lazy"
                     width={181}
                     height={40}
-                    className="  dark:invert"
+                    className="dark:invert"
+                    style={{ width: "auto", height: "auto" }}
                     src={logoImage.src}
                   />
                 </div>

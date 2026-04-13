@@ -33,6 +33,7 @@ export default async function Categories() {
                   width={150}
                   height={150}
                   className="w-full h-full object-cover p-2 transition-transform duration-500 group-hover:scale-110"
+                  style={{ width: "auto", height: "auto" }}
                   src={category?.image}
                 />
               </div>

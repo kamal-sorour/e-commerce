@@ -1,6 +1,6 @@
-"use client";
+'use client'
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -70,31 +70,39 @@ const slides = [
 ];
 
 export default function HeroSlider() {
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-  const theme = localStorage.getItem("theme") || null;
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
+  const [swiper, setSwiper] = useState<any>(null);
+  const [theme, setTheme] = useState<string | null>(null);
+
+  // ✅ localStorage fix
+  useEffect(() => {
+    setTheme(localStorage.getItem("theme"));
+  }, []);
+
+  // ✅ navigation fix بدون ما نغير التصميم
+  useEffect(() => {
+    if (swiper && prevRef.current && nextRef.current) {
+      swiper.params.navigation.prevEl = prevRef.current;
+      swiper.params.navigation.nextEl = nextRef.current;
+
+      swiper.navigation.destroy();
+      swiper.navigation.init();
+      swiper.navigation.update();
+    }
+  }, [swiper]);
 
   return (
     <>
-      <div className="relative w-full h-125 lg:h-150 group overflow-hidden -none shadow-sm">
+      <div className="relative w-full h-125 lg:h-150 group overflow-hidden shadow-sm">
         <Swiper
           modules={[Navigation, Pagination, Keyboard, Autoplay, EffectFade]}
           effect="fade"
           speed={1000}
-          loop={true}
-          slidesPerView={1}
           spaceBetween={0}
-          // ✅ fix navigation
-          onBeforeInit={(swiper) => {
-            // @ts-ignore
-            swiper.params.navigation.prevEl = prevRef.current;
-            // @ts-ignore
-            swiper.params.navigation.nextEl = nextRef.current;
-          }}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
+          slidesPerView={1}
+          loop={true}
+          onSwiper={setSwiper}
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
@@ -111,12 +119,13 @@ export default function HeroSlider() {
 
             return (
               <SwiperSlide key={slide.id} className="relative h-full w-full">
+                {/* صورة الخلفية */}
                 <Image
                   src={slide.image}
                   alt={slide.title.join(" ")}
-                  fill
-                  priority
-                  className="object-cover"
+                  width={1920}
+                  height={1080}
+                  className="absolute inset-0 w-full h-full object-cover object-center"
                 />
 
                 {/* overlay */}
@@ -124,7 +133,7 @@ export default function HeroSlider() {
 
                 {/* content */}
                 <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-16 lg:px-24 max-w-3xl">
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-tight mb-4">
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
                     {slide.title.map((line, i) => (
                       <span key={i} className="block">
                         {line}
@@ -132,15 +141,15 @@ export default function HeroSlider() {
                     ))}
                   </h1>
 
-                  <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-lg">
+                  <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-lg font-medium animate-in fade-in slide-in-from-bottom-10 duration-700 delay-150">
                     {slide.description}
                   </p>
 
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-12 duration-700 delay-300">
                     <Button
                       asChild
                       size="lg"
-                      className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full px-8 h-12"
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-full px-8 h-12 text-base shadow-lg shadow-emerald-600/20"
                     >
                       <Link href={slide.buttonLink}>
                         {Icon && <Icon className="mr-2 h-5 w-5" />}
@@ -152,9 +161,11 @@ export default function HeroSlider() {
                       asChild
                       size="lg"
                       variant="outline"
-                      className="rounded-full px-8 h-12"
+                      className="rounded-full px-8 h-12 text-base border-emerald-200 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 backdrop-blur-sm bg-white/50 dark:bg-slate-950/50"
                     >
-                      <Link href={slide.buttonLink2}>{slide.buttonText2}</Link>
+                      <Link href={slide.buttonLink2}>
+                        {slide.buttonText2}
+                      </Link>
                     </Button>
                   </div>
                 </div>
@@ -163,13 +174,13 @@ export default function HeroSlider() {
           })}
         </Swiper>
 
-        {/* navigation buttons */}
-        <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 left-4 right-4 justify-between z-30 pointer-events-none opacity-0 group-hover:opacity-100 transition">
+        {/* navigation buttons (زي ما هي بالظبط) */}
+        <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 left-4 right-4 justify-between z-30 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <Button
             ref={prevRef}
             variant="outline"
             size="icon"
-            className="pointer-events-auto h-12 w-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md"
+            className="pointer-events-auto h-12 w-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-transparent hover:border-emerald-500 hover:bg-white dark:hover:bg-slate-900 hover:text-emerald-600 text-slate-700 dark:text-slate-300 shadow-xl"
           >
             <ChevronLeft size={24} />
           </Button>
@@ -178,7 +189,7 @@ export default function HeroSlider() {
             ref={nextRef}
             variant="outline"
             size="icon"
-            className="pointer-events-auto h-12 w-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md"
+            className="pointer-events-auto h-12 w-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-transparent hover:border-emerald-500 hover:bg-white dark:hover:bg-slate-900 hover:text-emerald-600 text-slate-700 dark:text-slate-300 shadow-xl"
           >
             <ChevronRight size={24} />
           </Button>
@@ -189,17 +200,21 @@ export default function HeroSlider() {
           .swiper-pagination-bullet {
             background-color: #94a3b8;
             opacity: 0.5;
-            transition: 0.3s;
+            transition: all 0.3s ease;
           }
           .swiper-pagination-bullet-active {
             background-color: #059669 !important;
             opacity: 1 !important;
             width: 24px !important;
-            border-radius: 10px;
+            border-radius: 10px !important;
+          }
+          .dark .swiper-pagination-bullet {
+            background-color: #cbd5e1;
           }
         `}</style>
       </div>
-      <YassifyBanner variant={theme === "dark" ? "multicolor" : "emerald"} />
+
+      <YassifyBanner variant={theme === "dark" ? "emerald" : "multicolor" } />
     </>
   );
 }

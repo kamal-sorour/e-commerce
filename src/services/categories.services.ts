@@ -11,7 +11,7 @@ export async function getAllCategories(): Promise<CategoryType[]> {
       },
     });
 
-    console.log('Fetched categories:', res);
+    // console.log('Fetched categories:', res);
 
     return res.data.data;
   } catch (error) {
