@@ -5,12 +5,8 @@ import {
   CreditCard,
   Facebook,
   Instagram,
-  Mail,
-  MapPin,
-  Phone,
   Twitter,
   Youtube,
-  Send,
 } from "lucide-react";
 import logoImage from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
@@ -70,7 +66,6 @@ const socialLinks = [
 export default function Footer() {
   const [theme, setTheme] = useState<string | null>(null);
 
-  // ✅ localStorage fix
   useEffect(() => {
     setTheme(localStorage.getItem("theme"));
   }, []);
@@ -80,7 +75,6 @@ export default function Footer() {
       <footer className="w-full bg-slate-50 dark:bg-slate-950 border-t border-border transition-colors duration-300">
         <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
-            {/* Brand Section */}
             <div className="lg:col-span-4 space-y-6">
               <Link
                 className="inline-block transition-transform hover:scale-105"
@@ -106,7 +100,6 @@ export default function Footer() {
                 unmatched digital experience.
               </p>
 
-              {/* Social Media Buttons */}
               <div className="flex items-center gap-2 pt-2">
                 {socialLinks.map((social) => (
                   <Tooltip key={social.label}>
@@ -133,7 +126,6 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Links Sections */}
             <div className="lg:col-span-2">
               <h3 className="font-bold text-foreground mb-6">Shop</h3>
               <ul className="space-y-3">
@@ -200,7 +192,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-border bg-white/50 dark:bg-slate-900/30 transition-colors">
           <div className="container mx-auto px-4 py-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">

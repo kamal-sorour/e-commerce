@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -26,26 +25,12 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
-
 import { cn } from "@/lib/utils";
-
-// Assets & Internal Components
 import logoImage from "@/assets/logo.png";
 import { usePathname } from "next/navigation";
 import NavHeader from "../NavHeader/NavHeader";
 import { ThemeToggle } from "@/components/shared/ThemeToggle/ThemeToggle";
-// import SponsorBar from "../SponsorBar/SponsorBar";
 // import Dialog from "@/components/shared/Dialog/Dialog";
 
 interface NavbarProps {
@@ -85,9 +70,19 @@ const categories: Category[] = [
     href: "/categories/6439d5b90049ad0b52b90048",
   },
   {
+    id: "6439d41c67d9aa4ca97064d5",
+    name: "SuperMarket",
+    href: "/categories/6439d41c67d9aa4ca97064d5",
+  },
+  {
     id: "6439d30b67d9aa4ca97064b1",
     name: "Beauty & Health",
     href: "/categories/6439d30b67d9aa4ca97064b1",
+  },
+  {
+    id: "6439d40367d9aa4ca97064cc",
+    name: "Baby & Toys",
+    href: "/categories/6439d40367d9aa4ca97064cc",
   },
 ];
 
@@ -104,7 +99,6 @@ const Navbar = ({ className }: NavbarProps) => {
       >
         <div className="container mx-auto px-4">
           <nav className="flex items-center justify-between h-16 lg:h-20 gap-4">
-            {/* Logo */}
             <Link
               className="shrink-0 transition-opacity hover:opacity-90"
               href="/"
@@ -114,12 +108,11 @@ const Navbar = ({ className }: NavbarProps) => {
                 width={161}
                 height={31}
                 className="dark:invert"
-                style={{ width: "auto", height: "auto" }} // <--- التعديل بتاع الصورة هنا
+                style={{ width: "auto", height: "auto" }} 
                 src={logoImage.src}
               />
             </Link>
 
-            {/* Search Bar */}
             <form className="hidden lg:flex flex-1 max-w-xl mx-4">
               <div className="relative w-full group">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-green-600 transition-colors" />
@@ -131,7 +124,6 @@ const Navbar = ({ className }: NavbarProps) => {
               </div>
             </form>
 
-            {/* Desktop Navigation */}
             <NavigationMenu className="hidden xl:flex">
               <NavigationMenuList>
                 {mainLinks.map((link) => (
@@ -151,7 +143,6 @@ const Navbar = ({ className }: NavbarProps) => {
                   </NavigationMenuItem>
                 ))}
 
-                {/* Categories Dropdown using Shadcn */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent hover:text-green-600">
                     Categories
@@ -182,9 +173,7 @@ const Navbar = ({ className }: NavbarProps) => {
               </NavigationMenuList>
             </NavigationMenu>
 
-            {/* Right Actions */}
             <div className="flex items-center gap-1 lg:gap-3">
-              {/* Support (Hidden on mobile) */}
               <Link
                 className="hidden lg:flex items-center gap-3 pr-4 mr-2 border-r border-border hover:text-green-600 transition-colors"
                 href="/contact"
@@ -203,7 +192,6 @@ const Navbar = ({ className }: NavbarProps) => {
                 </div>
               </Link>
 
-              {/* Wishlist */}
               <Link
                 href="/wishlist"
                 className="relative p-2 rounded-full hover:bg-muted transition-colors group"
@@ -250,7 +238,6 @@ const Navbar = ({ className }: NavbarProps) => {
                   Sign In
                 </Link>
               </Button>
-              {/* Auth Logic */}
               {/* {status === "unauthenticated" ? (
               ) : (
                 <DropdownMenu>

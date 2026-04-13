@@ -20,7 +20,7 @@ export const fetchApi = async (endpoint: string, options: RequestInit = {}) => {
   }
 
   if (!response.ok) {
-    throw new Error(data?.message || 'حدث خطأ أثناء جلب البيانات');
+    throw new Error(data?.message || 'An error occurred while fetching data');
   }
 
   return {

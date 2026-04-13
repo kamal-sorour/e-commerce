@@ -1,4 +1,3 @@
-// components/ThemeToggle.tsx
 "use client";
 
 import React from "react";
@@ -16,11 +15,9 @@ import {
 export function ThemeToggle() {
   const { theme, setTheme, mounted } = useTheme();
 
-  // منع الرندرة حتى يتم التحميل في المتصفح للحفاظ على تطابق الأيقونة مع الثيم الفعلي
   if (!mounted) {
     return (
       <Button variant="ghost" size="icon" className="w-9 h-9 rounded-full relative p-2">
-         {/* Placeholder فاضي بنفس الحجم لمنع تحرك العناصر */}
         <div className="w-5.5  h-5.5 " />
       </Button>
     );
@@ -33,7 +30,6 @@ export function ThemeToggle() {
           variant="ghost"
           className="relative p-2 rounded-full hover:bg-muted transition-colors group w-9 h-9 focus-visible:ring-0 focus-visible:ring-offset-0"
         >
-          {/* الأيقونة تتغير بناءً على الـ State الحالي */}
           {theme === "light" && (
             <Sun className="absolute h-5.5 w-5.5 text-amber-500 transition-all" />
           )}

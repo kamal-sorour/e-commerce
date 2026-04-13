@@ -1,10 +1,10 @@
 import { Headset, RotateCcw, ShieldHalf, Truck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type BannerVariant = "multicolor" | "emerald";
+type BannerVariantType = "multicolor" | "emerald";
 
 interface CommonBannerProps {
-  variant?: BannerVariant;
+  variant?: BannerVariantType;
   className?: string;
 }
 
@@ -40,7 +40,7 @@ const bannerItems = [
 ];
 
 const variantConfig: Record<
-  BannerVariant,
+  BannerVariantType,
   {
     wrapper: string;
     card: string;
@@ -51,7 +51,7 @@ const variantConfig: Record<
     wrapper:
       "bg-slate-50/50 dark:bg-slate-950/50 border-y border-transparent dark:border-slate-800/50",
     card: "bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm hover:shadow-md dark:shadow-none border border-slate-100 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1",
-    defaultIconTheme: "", // سيستخدم الـ colorTheme الخاص بكل عنصر
+    defaultIconTheme: "",
   },
   emerald: {
     wrapper:
@@ -81,7 +81,6 @@ export default function YassifyBanner({
           {bannerItems.map((item) => {
             const Icon = item.icon;
 
-            // تحديد ألوان الأيقونة بناءً على الـ Variant
             const iconTheme =
               variant === "multicolor"
                 ? item.colorTheme
@@ -95,7 +94,6 @@ export default function YassifyBanner({
                   styles.card,
                 )}
               >
-                {/* الأيقونة مع تأثيرات الـ Hover */}
                 <div
                   className={cn(
                     "w-14 h-14 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3",
@@ -105,7 +103,6 @@ export default function YassifyBanner({
                   <Icon size={24} strokeWidth={1.5} />
                 </div>
 
-                {/* النصوص */}
                 <div>
                   <h4 className="font-bold text-slate-900 dark:text-slate-100 text-sm mb-1 transition-colors">
                     {item.title}

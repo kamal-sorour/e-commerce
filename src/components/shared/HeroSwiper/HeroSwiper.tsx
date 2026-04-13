@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -75,12 +75,10 @@ export default function HeroSlider() {
   const [swiper, setSwiper] = useState<any>(null);
   const [theme, setTheme] = useState<string | null>(null);
 
-  // ✅ localStorage fix
   useEffect(() => {
     setTheme(localStorage.getItem("theme"));
   }, []);
 
-  // ✅ navigation fix بدون ما نغير التصميم
   useEffect(() => {
     if (swiper && prevRef.current && nextRef.current) {
       swiper.params.navigation.prevEl = prevRef.current;
@@ -119,7 +117,6 @@ export default function HeroSlider() {
 
             return (
               <SwiperSlide key={slide.id} className="relative h-full w-full">
-                {/* صورة الخلفية */}
                 <Image
                   src={slide.image}
                   alt={slide.title.join(" ")}
@@ -128,10 +125,8 @@ export default function HeroSlider() {
                   className="absolute inset-0 w-full h-full object-cover object-center"
                 />
 
-                {/* overlay */}
                 <div className="absolute inset-0 bg-linear-to-r from-white/95 via-white/70 to-transparent dark:from-slate-950/95 dark:via-slate-950/80 dark:to-transparent z-10" />
 
-                {/* content */}
                 <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-16 lg:px-24 max-w-3xl">
                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
                     {slide.title.map((line, i) => (
@@ -174,7 +169,6 @@ export default function HeroSlider() {
           })}
         </Swiper>
 
-        {/* navigation buttons (زي ما هي بالظبط) */}
         <div className="hidden md:flex absolute top-1/2 -translate-y-1/2 left-4 right-4 justify-between z-30 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <Button
             ref={prevRef}
@@ -195,7 +189,6 @@ export default function HeroSlider() {
           </Button>
         </div>
 
-        {/* pagination style */}
         <style jsx global>{`
           .swiper-pagination-bullet {
             background-color: #94a3b8;

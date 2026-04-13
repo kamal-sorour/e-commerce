@@ -1,5 +1,5 @@
 export interface CategoryType {
-    name: string;
+  name: string;
   _id: string;
   slug: string;
   createdAt: string;

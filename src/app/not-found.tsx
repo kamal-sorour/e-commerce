@@ -18,26 +18,21 @@ export default function NotFound() {
           <Carrot />
         </div>
         
-        {/* Gradients */}
         <div className="absolute top-0 right-0 w-125 h-125 bg-linear-to-bl from-green-100/40 dark:from-green-900/20 to-transparent rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-100 h-100 bg-linear-to-tr from-green-100/30 dark:from-green-900/10 to-transparent rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-xl w-full">
-        {/* Illustration Section */}
         <div className="flex justify-center mb-10">
           <div className="relative">
-            {/* Glow effect */}
             <div className="absolute inset-0 w-64 h-52 sm:w-72 sm:h-60 bg-green-100/50 dark:bg-green-900/30 rounded-[32px] blur-2xl" />
             
             <div className="relative w-64 h-52 sm:w-72 sm:h-60">
-              {/* Main Card */}
               <div className="absolute inset-x-0 top-4 mx-auto w-52 h-40 sm:w-60 sm:h-44 bg-white dark:bg-slate-900 rounded-3xl shadow-xl shadow-gray-200/60 dark:shadow-none border border-gray-100 dark:border-slate-800 flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-linear-to-br from-green-50/80 dark:from-green-900/10 via-transparent to-green-100/40 dark:to-transparent" />
                 <ShoppingCart size={48} className="text-green-600 dark:text-green-500" />
               </div>
 
-              {/* 404 Badge */}
               <div className="absolute -top-2 -right-2 sm:top-0 sm:right-0">
                 <div className="relative">
                   <div className="absolute -inset-2 rounded-full bg-white dark:bg-slate-950 shadow-lg" />
@@ -47,7 +42,6 @@ export default function NotFound() {
                 </div>
               </div>
 
-              {/* Decorative Face/Smile */}
               <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 flex items-center justify-center gap-4">
                 <div className="w-2.5 h-2.5 rounded-full bg-green-400 dark:bg-green-600" />
                 <div className="w-8 h-4 border-b-[3px] border-green-400 dark:border-green-600 rounded-b-full" />
@@ -57,7 +51,6 @@ export default function NotFound() {
           </div>
         </div>
 
-        {/* Text Content */}
         <div className="text-center mb-10">
           <h1 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-slate-50 mb-4 tracking-tight">
             Oops! Nothing Here
