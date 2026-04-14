@@ -7,7 +7,7 @@ export async function getReviewsByProductId(productId: string): Promise<ReviewTy
       method: "GET",
     });
 
-    return res.data;
+    return res.data.data;
   } catch (error) {
     console.error('Error fetching reviews:', error);
     return [];

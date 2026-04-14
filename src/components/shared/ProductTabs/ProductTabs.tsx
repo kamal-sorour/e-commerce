@@ -41,7 +41,7 @@ function ProductReviewsTab({ productId, productInfo }: { productId: string, prod
         const res = await getReviewsByProductId(productId);
         
         // التأكد من استخراج المصفوفة بشكل صحيح سواء كانت في res.data أو res مباشرة
-        const fetchedReviews = Array.isArray(res?.data) ? res.data : (Array.isArray(res) ? res : []);
+        const fetchedReviews = Array.isArray(res) ? res : (Array.isArray(res) ? res : []);
         setAllReviews(fetchedReviews);
       } catch (error) {
         console.error("Failed to fetch reviews", error);
