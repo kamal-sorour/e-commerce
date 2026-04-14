@@ -7,7 +7,7 @@ import PageBanner from '@/components/shared/PageBanner/PageBanner';
 import SectionHeading from '@/components/shared//SectionHeading/SectionHeading';
 import ProductCard from '@/components/shared/ProductCard/ProductCard';
 
-import { getAllProducts } from "@/services/products.services";
+import { getProducts } from "@/services/products.services";
 import { ProductQueryParams } from '@/types/products';
 
 import defaultBrandImage from '@/assets/logo.png';
@@ -34,7 +34,7 @@ export default async function ShopCatalogPage({
   else if (category) queryParams['category[in]'] = category;
 
   // 2. جلب المنتجات
-  const productsResponse = await getAllProducts(queryParams);
+  const productsResponse = await getProducts(queryParams);
   const products = productsResponse?.data || [];
   const metadata = productsResponse?.metadata || { currentPage: 1, numberOfPages: 1 };
 

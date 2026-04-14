@@ -1,12 +1,12 @@
 import { ProductType } from '@/types/products';
 import ProductCard from '../ProductCard/ProductCard';
-import { getAllProducts } from '@/services/products.services';
+import { getProducts } from '@/services/products.services';
 import TopTitles from '../TopTitles/TopTitles';
 
 
 export default async function HomeProducts() {
   
-  const response = await getAllProducts({page: 1, sort: '-createdAt'});
+  const response = await getProducts({page: 1, sort: '-createdAt'});
   const products: ProductType[] = response?.data || [];
 
   if (products.length === 0) {

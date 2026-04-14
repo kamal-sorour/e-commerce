@@ -1,9 +1,9 @@
 // services/products.service.ts
 
-import { ProductQueryParams, ProductsResponse } from "@/types/products";
+import { ProductQueryParams, ProductsResponse, ProductType } from "@/types/products";
 import { fetchApi } from "./api";
 
-export async function getAllProducts(params?: ProductQueryParams): Promise<ProductsResponse | null> {
+export async function getProducts(params?: ProductQueryParams): Promise<ProductsResponse | null> {
   try {
     let queryString = "";
 
@@ -32,6 +32,21 @@ export async function getAllProducts(params?: ProductQueryParams): Promise<Produ
     return res.data;
   } catch (error) {
     console.error('Error fetching products:', error);
+    return null;
+  }
+}
+
+export async function getProductById(id: string): Promise<ProductType | null> {
+  try {
+    const res = await fetchApi(`/api/v1/products/${id}`, {
+      method: "GET",
+    });
+
+    // console.log('Fetched product by ID:', res);
+
+    return res.data.data;
+  } catch (error) {
+    console.error('Error fetching product by ID:', error);
     return null;
   }
 }
