@@ -6,3 +6,12 @@ export interface CategoryType {
   image: string;
   updatedAt: string;
 }
+
+export interface SubCategory {
+  _id: string;
+  name: string;
+  slug: string;
+  category: string;
+  createdAt?: string;
+  updatedAt?: string;
+}

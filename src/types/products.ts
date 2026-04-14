@@ -1,11 +1,7 @@
 // types/products.ts
 
-export interface SubCategory {
-  _id: string;
-  name: string;
-  slug: string;
-  category: string;
-}
+import { SubCategory } from "./categories";
+
 
 export interface Category {
   _id: string;
