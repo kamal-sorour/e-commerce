@@ -12,9 +12,9 @@ import { CategoryType } from '@/types/categories';
 
 export default async function CategoriesPage() {
   const categoriesRes = await getAllCategories();
-  const categories: CategoryType[] = Array.isArray(categoriesRes) 
+  const categories: CategoryType[] = Array.isArray(categoriesRes)
     ? categoriesRes 
-    : (categoriesRes?.data || []);
+    : (categoriesRes && typeof categoriesRes === 'object' && 'data' in categoriesRes ? (categoriesRes as any).data || [] : []);
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
