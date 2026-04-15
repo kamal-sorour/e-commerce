@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { addToWishlist } from "@/actions/wishlist.actions";
 
 import { cn } from "@/lib/utils";
+import { useCartWishlist } from "@/providers/CartWishlistProvider/CartWishlistProvider";
 
 interface AddToWishlistButtonProps {
   productId: string;
@@ -24,6 +25,7 @@ export default function AddToWishlistButton({
 }: AddToWishlistButtonProps) {
   
   const [isLoading, setIsLoading] = useState(false);
+  const { incrementWishlistCount } = useCartWishlist();
 
   async function addProductToWishlist() {
     setIsLoading(true);
@@ -32,7 +34,7 @@ export default function AddToWishlistButton({
       
       if (res.success) {
         toast.success(res.message || "Added to wishlist successfully!");
-        // updateNumOfWishlistItems(res.data.length);
+        incrementWishlistCount();
       } else {
         toast.error(res.message || "Failed to add to wishlist.");
       }

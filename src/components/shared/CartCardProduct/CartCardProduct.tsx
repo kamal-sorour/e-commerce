@@ -14,6 +14,7 @@ import { removeCartProduct, updateProductQuantity } from "@/actions/cart.actions
 import { ViewType } from "@/components/shared/ViewToggle/ViewToggle";
 import { cn } from "@/lib/utils";
 import { ProductType } from "@/types/products";
+import { useCartWishlist } from "@/providers/CartWishlistProvider/CartWishlistProvider";
 
 interface CartCardProps {
   product: ProductType;
@@ -27,6 +28,7 @@ export default function CartCardProduct({ product, view, index, price, quantity 
 
   const [isUpdating, setIsUpdating] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
+  const { decrementCartCount } = useCartWishlist();
 
   async function updateQuantity(id: string, quantity: number) {
     if (quantity < 1) return;
@@ -50,7 +52,7 @@ export default function CartCardProduct({ product, view, index, price, quantity 
       const response = await removeCartProduct(productId);
       if (response.success) {
         toast.success("Item removed from cart");
-        // updateNumOfCartItems(response.numOfCartItems);
+        decrementCartCount();
       } else {
         toast.error(response.message);
       }

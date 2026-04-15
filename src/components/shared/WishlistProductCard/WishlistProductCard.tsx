@@ -16,6 +16,7 @@ import { ProductType } from "@/types/products";
 import { ViewType } from "@/components/shared/ViewToggle/ViewToggle";
 import AddToCartButton from "@/components/shared/AddToCartButton/AddToCartButton";
 import { cn } from "@/lib/utils";
+import { useCartWishlist } from "@/providers/CartWishlistProvider/CartWishlistProvider";
 
 interface WishlistCardProps {
   product: ProductType;
@@ -27,6 +28,7 @@ interface WishlistCardProps {
 export default function WishlistProductCard({ product, view, index, onRemove }: WishlistCardProps) {
 
   const [isRemoving, setIsRemoving] = useState(false);
+  const { decrementWishlistCount } = useCartWishlist();
 
   async function removeProductFromWishlist() {
     setIsRemoving(true);
@@ -34,7 +36,7 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
       const res = await removeFromWishlist(product._id);
       if (res.success) {
         toast.success("Removed from wishlist");
-        
+        decrementWishlistCount();
         onRemove(product._id); 
       } else {
         toast.error(res.message || "Failed to remove item");

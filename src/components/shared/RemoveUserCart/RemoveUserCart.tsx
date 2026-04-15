@@ -6,12 +6,14 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { clearUserCart } from "@/actions/cart.actions";
+import { useCartWishlist } from "@/providers/CartWishlistProvider/CartWishlistProvider";
 
 
 
 export default function RemoveUserCart({ onClear }: { onClear?: () => void }) {
 
   const [isLoading, setIsLoading] = useState(false);
+  const { setCartCount } = useCartWishlist();
 
   async function clearCart() {
     setIsLoading(true);
@@ -19,7 +21,7 @@ export default function RemoveUserCart({ onClear }: { onClear?: () => void }) {
       const response = await clearUserCart();
       if (response.success) {
         toast.success("Cart cleared successfully");
-        
+        setCartCount(0);
         if(onClear) onClear();
       } else {
         toast.error(response.message || "Failed to clear cart");

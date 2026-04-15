@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 const exo = Exo({
   variable: "--font-exo",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"], // اختار اللي انت محتاجه
+  weight: ["400", "500", "600", "700"], 
 });
 
 export const metadata: Metadata = {

@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 
 import logoImage from "@/assets/logo.png";
+import { useCartWishlist } from "@/providers/CartWishlistProvider/CartWishlistProvider";
 
 
 const mainNavCards = [
@@ -47,6 +48,8 @@ interface MobileNavProps {
 }
 
 export default function MobileNav({ status, sessionData }: MobileNavProps) {
+  const { cartCount, wishlistCount } = useCartWishlist();
+
   return (
     <Drawer direction="right">
       <DrawerTrigger asChild>
@@ -127,6 +130,11 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
                   <div className="flex items-center gap-3">
                     <Heart size={20} className="text-slate-500" />
                     <span className="font-bold text-slate-700 dark:text-slate-200">Wishlist</span>
+                    {wishlistCount > 0 && (
+                      <span className="ml-auto mr-2 flex items-center justify-center min-w-[20px] h-[20px] px-1.5 text-[10px] font-bold text-white bg-red-500 rounded-full">
+                        {wishlistCount > 99 ? '99+' : wishlistCount}
+                      </span>
+                    )}
                   </div>
                   <ChevronRight size={16} className="text-slate-400" />
                 </Link>
@@ -136,6 +144,11 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
                   <div className="flex items-center gap-3">
                     <ShoppingCart size={20} className="text-slate-500" />
                     <span className="font-bold text-slate-700 dark:text-slate-200">Shopping Cart</span>
+                    {cartCount > 0 && (
+                      <span className="ml-auto mr-2 flex items-center justify-center min-w-[20px] h-[20px] px-1.5 text-[10px] font-bold text-white bg-emerald-600 rounded-full">
+                        {cartCount > 99 ? '99+' : cartCount}
+                      </span>
+                    )}
                   </div>
                   <ChevronRight size={16} className="text-slate-400" />
                 </Link>

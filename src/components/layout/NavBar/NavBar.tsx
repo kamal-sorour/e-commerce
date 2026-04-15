@@ -48,6 +48,7 @@ import logoImage from "@/assets/logo.png";
 import NavHeader from "../NavHeader/NavHeader";
 import { ThemeToggle } from "@/components/shared/ThemeToggle/ThemeToggle";
 import MobileNav from "@/components/shared/MobileNav/MobileNav";
+import { useCartWishlist } from "@/providers/CartWishlistProvider/CartWishlistProvider";
 
 interface NavbarProps {
   className?: string;
@@ -72,6 +73,7 @@ const categories = [
 export default function Navbar({ className }: NavbarProps) {
   const pathname = usePathname();
   const { status, data: sessionData } = useSession();
+  const { cartCount, wishlistCount } = useCartWishlist();
   
   const logOutHandler = () => {
     signOut({ callbackUrl: "/" });
@@ -196,10 +198,20 @@ export default function Navbar({ className }: NavbarProps) {
               <div className="flex items-center gap-1">
                 <Link href="/wishlist" className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors group">
                   <Heart size={22} strokeWidth={2} className="text-slate-700 dark:text-slate-300 group-hover:text-red-500 transition-colors" />
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-[10px] font-bold text-white bg-red-500 rounded-full ring-2 ring-white dark:ring-slate-950 shadow-sm animate-in zoom-in-50 duration-200">
+                      {wishlistCount > 99 ? '99+' : wishlistCount}
+                    </span>
+                  )}
                 </Link>
 
                 <Link href="/cart" className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors group">
                   <ShoppingCart size={22} strokeWidth={2} className="text-slate-700 dark:text-slate-300 group-hover:text-emerald-600 transition-colors" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-[10px] font-bold text-white bg-emerald-600 rounded-full ring-2 ring-white dark:ring-slate-950 shadow-sm animate-in zoom-in-50 duration-200">
+                      {cartCount > 99 ? '99+' : cartCount}
+                    </span>
+                  )}
                 </Link>
 
                 <ThemeToggle />
