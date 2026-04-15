@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Exo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/NavBar/NavBar";
 import Footer from "@/components/layout/Footer/Footer";
@@ -16,6 +17,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const exo = Exo({
+  variable: "--font-exo",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // اختار اللي انت محتاجه
+});
+
 export const metadata: Metadata = {
   title: "Yassify - Fresh Groceries Delivered Fast",
   description:
@@ -30,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${exo.variable} h-full antialiased`}
     >
       <body className="antialiased">
         <Providers>

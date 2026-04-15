@@ -11,7 +11,6 @@ export async function getAllBrands(): Promise<BrandType[]> {
       },
     });
 
-    // console.log('Fetched brands:', res);
 
     return res.data.data;
   } catch (error) {

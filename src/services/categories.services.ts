@@ -30,7 +30,6 @@ export async function getAllSubCategoriesOnCategory(categoryId: string): Promise
       },
     });
 
-    // console.log('Fetched subcategories:', res);
 
     return res.data.data;
   } catch (error) {

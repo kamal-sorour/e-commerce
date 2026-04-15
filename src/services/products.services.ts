@@ -42,7 +42,6 @@ export async function getProductById(id: string): Promise<ProductType | null> {
       method: "GET",
     });
 
-    // console.log('Fetched product by ID:', res);
 
     return res.data.data;
   } catch (error) {
