@@ -51,7 +51,6 @@ export default async function BrandsPage() {
                       src={brand.image || defaultBrandImage}
                       width={200}
                       height={200}
-                      // استخدمنا object-contain عشان اللوجو ميتفرمش
                       className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-sm dark:drop-shadow-none"
                     />
                   </div>

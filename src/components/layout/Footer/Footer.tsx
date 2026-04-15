@@ -34,8 +34,8 @@ const footerLinks = {
     { label: "Order History", href: "/allorders" },
     { label: "Wishlist", href: "/wishlist" },
     { label: "Shopping Cart", href: "/cart" },
-    { label: "Sign In", href: "/login" },
-    { label: "Create Account", href: "/register" },
+    { label: "Sign In", href: "/signin" },
+    { label: "Create Account", href: "/signup" },
   ],
   support: [
     { label: "Contact Us", href: "/contact" },

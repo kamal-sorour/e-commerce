@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mail, Phone, Gift, Truck, Link } from 'lucide-react';
 import { Separator } from "@/components/ui/separator";
+import UserNavHeader from '@/components/shared/UserNavHeader/UserNavHeader';
 
 function NavHeader() {
   return (
@@ -47,10 +48,10 @@ function NavHeader() {
 
         <Separator orientation="vertical" className="h-5 bg-border mx-2" />
 
-        {/* مكون اليوزر
+        
         <div className="flex items-center">
-          <UserTopNav />
-        </div> */}
+          <UserNavHeader />
+        </div> 
       </div>
     </header>
   );

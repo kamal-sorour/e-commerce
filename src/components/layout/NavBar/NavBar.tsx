@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 import {
-  ChevronDown,
   Headset,
   Heart,
   Search,
@@ -12,6 +13,12 @@ import {
   UserCircle,
   LogOut,
   Settings,
+  PackageSearch,
+  Music,
+  Shirt,
+  Baby,
+  Sparkles,
+  ShoppingBasket
 } from "lucide-react";
 
 import {
@@ -26,12 +33,21 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+
 import logoImage from "@/assets/logo.png";
-import { usePathname } from "next/navigation";
 import NavHeader from "../NavHeader/NavHeader";
 import { ThemeToggle } from "@/components/shared/ThemeToggle/ThemeToggle";
-// import Dialog from "@/components/shared/Dialog/Dialog";
+import MobileNav from "@/components/shared/MobileNav/MobileNav";
 
 interface NavbarProps {
   className?: string;
@@ -43,89 +59,63 @@ const mainLinks = [
   { name: "Brands", href: "/brands" },
 ];
 
-interface Category {
-  id?: string;
-  name: string;
-  href: string;
-}
-
-const categories: Category[] = [
-  {
-    name: "All Categories",
-    href: "/categories",
-  },
-  {
-    id: "6439d61c0049ad0b52b90051",
-    name: "Music",
-    href: "/categories/6439d61c0049ad0b52b90051",
-  },
-  {
-    id: "6439d58a0049ad0b52b9003f",
-    name: "Women's Fashion",
-    href: "/categories/6439d58a0049ad0b52b9003f",
-  },
-  {
-    id: "6439d5b90049ad0b52b90048",
-    name: "Men's Fashion",
-    href: "/categories/6439d5b90049ad0b52b90048",
-  },
-  {
-    id: "6439d41c67d9aa4ca97064d5",
-    name: "SuperMarket",
-    href: "/categories/6439d41c67d9aa4ca97064d5",
-  },
-  {
-    id: "6439d30b67d9aa4ca97064b1",
-    name: "Beauty & Health",
-    href: "/categories/6439d30b67d9aa4ca97064b1",
-  },
-  {
-    id: "6439d40367d9aa4ca97064cc",
-    name: "Baby & Toys",
-    href: "/categories/6439d40367d9aa4ca97064cc",
-  },
+// أضفنا أيقونات ووصف لكل قسم عشان الـ Mega Menu تبان احترافية
+const categories = [
+  { id: "all", name: "All Categories", href: "/categories", icon: PackageSearch, desc: "Browse everything" },
+  { id: "6439d61c0049ad0b52b90051", name: "Music", href: "/categories/6439d61c0049ad0b52b90051", icon: Music, desc: "Instruments & audio" },
+  { id: "6439d58a0049ad0b52b9003f", name: "Women's Fashion", href: "/categories/6439d58a0049ad0b52b9003f", icon: Sparkles, desc: "Trending clothing" },
+  { id: "6439d5b90049ad0b52b90048", name: "Men's Fashion", href: "/categories/6439d5b90049ad0b52b90048", icon: Shirt, desc: "Apparel & accessories" },
+  { id: "6439d41c67d9aa4ca97064d5", name: "SuperMarket", href: "/categories/6439d41c67d9aa4ca97064d5", icon: ShoppingBasket, desc: "Daily essentials" },
+  { id: "6439d40367d9aa4ca97064cc", name: "Baby & Toys", href: "/categories/6439d40367d9aa4ca97064cc", icon: Baby, desc: "Kids & toddlers" },
 ];
 
-const Navbar = ({ className }: NavbarProps) => {
+export default function Navbar({ className }: NavbarProps) {
   const pathname = usePathname();
+  const { status, data: sessionData } = useSession();
+  
+  const logOutHandler = () => {
+    signOut({ callbackUrl: "/" });
+  };
+
   return (
     <>
       <NavHeader />
       <header
         className={cn(
-          "sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 shadow-sm",
+          "sticky top-0 z-40 w-full border-b bg-white/90 dark:bg-slate-950/90 backdrop-blur-md shadow-sm transition-colors duration-500",
           className,
         )}
       >
         <div className="container mx-auto px-4">
           <nav className="flex items-center justify-between h-16 lg:h-20 gap-4">
-            <Link
-              className="shrink-0 transition-opacity hover:opacity-90"
-              href="/"
-            >
+            
+            {/* Logo */}
+            <Link className="shrink-0 transition-transform hover:scale-105 active:scale-95" href="/">
               <Image
                 alt="Yassify"
-                width={161}
-                height={31}
-                className="dark:invert"
-                style={{ width: "auto", height: "auto" }} 
+                width={140}
+                height={30}
+                className="dark:invert w-auto h-7 lg:h-8"
                 src={logoImage.src}
+                priority
               />
             </Link>
 
+            {/* Search Bar */}
             <form className="hidden lg:flex flex-1 max-w-xl mx-4">
               <div className="relative w-full group">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-green-600 transition-colors" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
                 <Input
                   type="search"
-                  placeholder="Search for products..."
-                  className="w-full pl-10 pr-4 rounded-full border-muted bg-muted/50 focus-visible:ring-green-500/20 focus-visible:border-green-500 transition-all"
+                  placeholder="Search for premium products..."
+                  className="w-full pl-11 pr-4 h-11 rounded-full border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 focus-visible:ring-emerald-500/20 focus-visible:border-emerald-500 transition-all shadow-inner"
                 />
               </div>
             </form>
 
+            {/* Desktop Navigation */}
             <NavigationMenu className="hidden xl:flex">
-              <NavigationMenuList>
+              <NavigationMenuList className="gap-2">
                 {mainLinks.map((link) => (
                   <NavigationMenuItem key={link.href}>
                     <NavigationMenuLink asChild active={pathname === link.href}>
@@ -133,8 +123,8 @@ const Navbar = ({ className }: NavbarProps) => {
                         href={link.href}
                         className={cn(
                           navigationMenuTriggerStyle(),
-                          "bg-transparent hover:text-green-600 dark:hover:text-green-400",
-                          pathname === link.href && "text-green-600 font-bold",
+                          "bg-transparent hover:bg-emerald-50 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-bold rounded-full transition-colors",
+                          pathname === link.href && "text-emerald-600 dark:text-emerald-400 bg-emerald-50/50 dark:bg-emerald-950/20",
                         )}
                       >
                         {link.name}
@@ -143,150 +133,131 @@ const Navbar = ({ className }: NavbarProps) => {
                   </NavigationMenuItem>
                 ))}
 
+                {/* ================= Mega Menu (Categories) ================= */}
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:text-green-600">
+                  <NavigationMenuTrigger className="bg-transparent hover:bg-emerald-50 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-bold rounded-full transition-colors">
                     Categories
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <ul className="grid w-62.5 gap-1 p-4 bg-popover rounded-md shadow-md border">
-                      {categories.length > 0 ? (
-                        categories.map((cat, i) => (
-                          <li key={i}>
-                            <NavigationMenuLink asChild>
-                              <Link
-                                href={cat.href}
-                                className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground text-sm font-medium"
-                              >
-                                {cat.name}
-                              </Link>
-                            </NavigationMenuLink>
-                          </li>
-                        ))
-                      ) : (
-                        <p className="text-xs text-muted-foreground p-2 text-center">
-                          Loading categories...
-                        </p>
-                      )}
-                    </ul>
+                    <div className="w-125 lg:w-150 p-6 bg-white dark:bg-slate-950 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800">
+                      <div className="mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
+                         <h4 className="font-black text-slate-900 dark:text-slate-100">Explore Departments</h4>
+                      </div>
+                      <ul className="grid grid-cols-2 gap-3">
+                        {categories.map((cat) => {
+                          const Icon = cat.icon;
+                          return (
+                            <li key={cat.id}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  href={cat.href}
+                                  className="group flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-900 border border-transparent hover:border-slate-100 dark:hover:border-slate-800 transition-all"
+                                >
+                                  <div className="w-10 h-10 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                                    <Icon size={20} className="text-emerald-600 dark:text-emerald-400" />
+                                  </div>
+                                  <div>
+                                    <div className="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                      {cat.name}
+                                    </div>
+                                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">
+                                      {cat.desc}
+                                    </p>
+                                  </div>
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
 
-            <div className="flex items-center gap-1 lg:gap-3">
+            {/* Right Actions */}
+            <div className="flex items-center gap-2 lg:gap-4">
+              
               <Link
-                className="hidden lg:flex items-center gap-3 pr-4 mr-2 border-r border-border hover:text-green-600 transition-colors"
+                className="hidden lg:flex items-center gap-3 pr-4 mr-2 border-r border-slate-200 dark:border-slate-800 hover:text-emerald-600 transition-colors group"
                 href="/contact"
               >
-                <div className="w-9 h-9 rounded-full bg-green-50 dark:bg-green-900/20 flex items-center justify-center">
-                  <Headset
-                    size={18}
-                    className="text-green-600 dark:text-green-500"
-                  />
+                <div className="w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-900 flex items-center justify-center group-hover:bg-emerald-50 dark:group-hover:bg-emerald-900/30 transition-colors">
+                  <Headset size={20} className="text-slate-600 dark:text-slate-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400" />
                 </div>
-                <div className="text-[11px] leading-tight">
-                  <div className="text-muted-foreground font-medium">
-                    Support
-                  </div>
-                  <div className="font-bold text-foreground">24/7 Help</div>
+                <div className="text-xs leading-tight">
+                  <div className="text-slate-500 font-medium">Support</div>
+                  <div className="font-bold text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400">24/7 Help</div>
                 </div>
               </Link>
 
-              <Link
-                href="/wishlist"
-                className="relative p-2 rounded-full hover:bg-muted transition-colors group"
-              >
-                <Heart
-                  size={22}
-                  className="text-foreground/80 group-hover:text-red-500 transition-colors"
-                />
-                {/* {count > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-red-600 hover:bg-red-600 border-2 border-background">
-                    {count}
-                  </Badge>
-                )} */}
-              </Link>
-
-              {/* Cart */}
-              <Link
-                href="/cart"
-                className="relative p-2 rounded-full hover:bg-muted transition-colors group"
-              >
-                <ShoppingCart
-                  size={22}
-                  className="text-foreground/80 group-hover:text-green-600 transition-colors"
-                />
-                {/* {numOfCartItems > 0 && (
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-green-600 hover:bg-green-600 border-2 border-background">
-                    {numOfCartItems}
-                  </Badge>
-                )} */}
-              </Link>
-              <ThemeToggle />
-              <Separator
-                orientation="vertical"
-                className="h-6 mx-1 hidden sm:block"
-              />
-
-              <Button
-                asChild
-                size="sm"
-                className="hidden sm:flex rounded-full bg-green-600 hover:bg-green-700 text-white gap-2 px-6"
-              >
-                <Link href="/login">
-                  <User size={16} />
-                  Sign In
+              {/* Action Icons */}
+              <div className="flex items-center gap-1">
+                <Link href="/wishlist" className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors group">
+                  <Heart size={22} strokeWidth={2} className="text-slate-700 dark:text-slate-300 group-hover:text-red-500 transition-colors" />
                 </Link>
-              </Button>
-              {/* {status === "unauthenticated" ? (
+
+                <Link href="/cart" className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors group">
+                  <ShoppingCart size={22} strokeWidth={2} className="text-slate-700 dark:text-slate-300 group-hover:text-emerald-600 transition-colors" />
+                </Link>
+
+                <ThemeToggle />
+              </div>
+
+              <Separator orientation="vertical" className="h-8 mx-1 hidden sm:block bg-slate-200 dark:bg-slate-800" />
+
+              {/* User Menu */}
+              {status === "unauthenticated" ? (
+                <Button
+                  asChild
+                  className="hidden sm:flex rounded-full bg-emerald-600 hover:bg-emerald-700 text-white gap-2 px-6 h-10 shadow-md shadow-emerald-600/20 active:scale-95 transition-all"
+                >
+                  <Link href="/signin">
+                    <User size={16} strokeWidth={2.5} />
+                    Sign In
+                  </Link>
+                </Button>
               ) : (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0">
-                      <UserCircle className="h-7 w-7 text-muted-foreground hover:text-green-600 transition-colors" />
+                    <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900">
+                      <UserCircle className="h-6 w-6 text-slate-700 dark:text-slate-300" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56" align="end" forceMount>
-                    <DropdownMenuLabel className="font-normal">
+                  <DropdownMenuContent className="w-56 rounded-2xl p-2 border-slate-100 dark:border-slate-800 shadow-xl" align="end" forceMount>
+                    <DropdownMenuLabel className="font-normal px-3 py-2">
                       <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">{sessionData?.user?.name || "User"}</p>
-                        <p className="text-xs leading-none text-muted-foreground">{sessionData?.user?.email}</p>
+                        <p className="text-sm font-bold leading-none text-slate-900 dark:text-slate-100">{sessionData?.user?.name || "User"}</p>
+                        <p className="text-xs leading-none text-slate-500">{sessionData?.user?.email}</p>
                       </div>
                     </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
+                    <DropdownMenuSeparator className="bg-slate-100 dark:bg-slate-800" />
                     <DropdownMenuGroup>
-                      <DropdownMenuItem asChild>
-                        <Link href="/profile" className="flex items-center gap-2 w-full">
-                          <User className="h-4 w-4" /> Profile
-                        </Link>
+                      <DropdownMenuItem asChild className="rounded-xl cursor-pointer px-3 py-2.5 font-medium hover:bg-emerald-50 dark:hover:bg-slate-900 hover:text-emerald-600 dark:hover:text-emerald-400">
+                        <Link href="/profile"><User className="h-4 w-4 mr-2" /> Profile</Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link href="/allorders" className="flex items-center gap-2 w-full">
-                          <ShoppingCart className="h-4 w-4" /> My Orders
-                        </Link>
+                      <DropdownMenuItem asChild className="rounded-xl cursor-pointer px-3 py-2.5 font-medium hover:bg-emerald-50 dark:hover:bg-slate-900 hover:text-emerald-600 dark:hover:text-emerald-400">
+                        <Link href="/allorders"><ShoppingCart className="h-4 w-4 mr-2" /> My Orders</Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                        <Link href="/settings" className="flex items-center gap-2 w-full">
-                          <Settings className="h-4 w-4" /> Settings
-                        </Link>
+                      <DropdownMenuItem asChild className="rounded-xl cursor-pointer px-3 py-2.5 font-medium hover:bg-emerald-50 dark:hover:bg-slate-900 hover:text-emerald-600 dark:hover:text-emerald-400">
+                        <Link href="/settings"><Settings className="h-4 w-4 mr-2" /> Settings</Link>
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={logOutHandler} className="text-red-600 focus:text-red-600 cursor-pointer">
+                    <DropdownMenuSeparator className="bg-slate-100 dark:bg-slate-800" />
+                    <DropdownMenuItem onClick={logOutHandler} className="rounded-xl cursor-pointer px-3 py-2.5 font-bold text-red-600 focus:bg-red-50 dark:focus:bg-red-950/30 focus:text-red-600">
                       <LogOut className="h-4 w-4 mr-2" /> Sign Out
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               )}
-               */}
-              {/* Dialog (Keep as is since it's custom) */}
-              {/* <Dialog status={status} sessionData={sessionData} /> */}
+              
+              {/* Mobile Drawer Trigger */}
+              <MobileNav status={status} sessionData={sessionData} />
             </div>
           </nav>
         </div>
       </header>
     </>
   );
-};
-
-export default Navbar;
+}
