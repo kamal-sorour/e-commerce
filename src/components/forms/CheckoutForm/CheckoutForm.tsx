@@ -47,7 +47,7 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
       city: "",
       postalCode: "",
       phone: "",
-      paymentMethod: "card", // افتراضي بطاقة ائتمان
+      paymentMethod: "card", 
     },
   });
 

@@ -16,7 +16,7 @@ export default async function ProductDetailsPage( props : ProductDetailsPageProp
 //   console.log('Product ID from params:', id);
   
   const [productRes, relatedProductsRes] = await Promise.all([
-    getProductById(id), // نستخدم id هنا
+    getProductById(id), 
     getProducts({ limit: 10 }),
   ]);
 

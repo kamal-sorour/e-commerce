@@ -24,7 +24,7 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
       <div className="relative w-full aspect-square rounded-3xl overflow-hidden bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm">
         <Swiper
           style={{
-            "--swiper-navigation-color": "#059669", // Emerald 600
+            "--swiper-navigation-color": "#059669", 
             "--swiper-navigation-size": "24px",
           } as React.CSSProperties}
           loop={true}

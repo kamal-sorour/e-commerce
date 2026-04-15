@@ -26,9 +26,6 @@ export default function WishlistPage() {
       try {
         const res = await getWishlistItems();
         setWishlistDetails(res);
-        // تحديث العداد بناءً على الداتا اللي رجعت
-        // if (res?.data)
-        //      updateNumOfWishlistItems(res.data.length);
       } catch (error) {
         console.error("Failed to load wishlist");
       } finally {
