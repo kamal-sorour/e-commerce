@@ -29,7 +29,7 @@ const createOrderRequest = async (
 
 export async function createOrder(
   cartId: string,
-  formValues,
+  formValues: any,
 ) {
   try {
     const { paymentMethod, ...shippingAddress } = formValues;

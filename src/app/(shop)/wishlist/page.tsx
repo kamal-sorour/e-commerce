@@ -6,7 +6,6 @@ import { ArrowRight, Heart, Box, Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { getWishlistItems } from "@/actions/wishlist.actions";
-import { wishlistResponse } from "@/interfaces/wishlist.interface";
 
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import ViewToggle, { ViewType } from "@/components/shared/ViewToggle/ViewToggle";
@@ -15,7 +14,7 @@ import WishlistProductCard from "@/components/shared/WishlistProductCard/Wishlis
 
 export default function WishlistPage() {
   const [view, setView] = useState<ViewType>("list");
-  const [wishlistDetails, setWishlistDetails] = useState<wishlistResponse | null>(null);
+  const [wishlistDetails, setWishlistDetails] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -66,14 +65,14 @@ export default function WishlistPage() {
             ${view === "grid" ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" : ""}
             ${view === "bento" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 auto-rows-max" : ""}
           `}>
-            {products.map((product, idx) => (
+            {products.map((product: any, idx: number) => (
               <WishlistProductCard
                 key={product._id}
                 product={product}
                 view={view}
                 index={idx} 
                 onRemove={(id) => {
-                  const updatedProducts = products.filter(p => p._id !== id);
+                  const updatedProducts = products.filter((p: any) => p._id !== id);
                   setWishlistDetails({ ...wishlistDetails!, data: updatedProducts });
                 }}
               />

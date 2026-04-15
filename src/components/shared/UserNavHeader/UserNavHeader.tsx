@@ -16,7 +16,7 @@ export default function UserNavHeader() {
   const handleLogout = async () => {
     setIsLoggingOut(true);
     try {
-      const res = await signOut();
+      const res: any = await signOut();
 
       if (res?.success) {
         toast.success("Logged out successfully");

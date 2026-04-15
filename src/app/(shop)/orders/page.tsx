@@ -2,7 +2,6 @@ import Link from "next/link";
 import { PackageOpen, ArrowRight, ShoppingBag } from "lucide-react";
 
 import { getUserOrders } from "@/actions/order.actions";
-import { order } from "@/interfaces/allorders.interface";
 
 import OrderCard from "@/components/shared/OrderCard/OrderCard";
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
@@ -15,7 +14,7 @@ export default async function AllOrdersPage() {
   
   
   const { status, ...orders } = resp;
-  const allOrders: order[] = status ? Object.values(orders) : [];
+  const allOrders: any[] = status ? Object.values(orders) : [];
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500 py-12">

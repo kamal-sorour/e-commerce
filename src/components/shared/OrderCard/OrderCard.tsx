@@ -18,11 +18,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { order } from "@/interfaces/allorders.interface";
 import { cn } from "@/lib/utils";
 
 interface OrderCardProps {
-  order: order;
+  order: any;
 }
 
 export default function OrderCard({ order }: OrderCardProps) {
@@ -30,7 +29,7 @@ export default function OrderCard({ order }: OrderCardProps) {
 
   
   const subtotal = order.cartItems.reduce(
-    (sum, item) => sum + item.price * item.count,
+    (sum: number, item: any) => sum + item.price * item.count,
     0
   );
 
@@ -142,7 +141,7 @@ export default function OrderCard({ order }: OrderCardProps) {
                   Order Items
                 </h3>
                 <div className="space-y-3">
-                  {order.cartItems.map((item, i) => (
+                  {order.cartItems.map((item: any, i: number) => (
                     <div
                       key={i}
                       className="flex items-center gap-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-4 shadow-sm"

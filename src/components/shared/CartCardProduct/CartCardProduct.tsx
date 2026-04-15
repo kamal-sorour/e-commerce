@@ -20,6 +20,7 @@ interface CartCardProps {
   view: ViewType;
   index: number;
   price: number;
+    quantity: number;
 }
 
 export default function CartCardProduct({ product, view, index, price, quantity }: CartCardProps) {
@@ -32,7 +33,7 @@ export default function CartCardProduct({ product, view, index, price, quantity 
     setIsUpdating(true);
     try {
       const resp = await updateProductQuantity(id, quantity);
-      if (resp.status) {
+      if (resp.success) {
         
         toast.success("done updated");
       } else {
