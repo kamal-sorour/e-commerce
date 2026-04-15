@@ -13,13 +13,21 @@ export interface CartData {
   totalCartPrice: number;
 }
 
-export interface CartResponse {
-  data: {
- status?: string;
+export interface CartResponseData {
+  status?: string;
   numOfCartItems?: number;
   cartId?: string;
   data?: CartData;
   success?: boolean;
   message?: string;
-  }
+}
+
+export interface CartResponse {
+  data: CartResponseData;
+}
+
+export interface CartActionResponse {
+  success: boolean;
+  message: string;
+  numOfCartItems?: number;
 }

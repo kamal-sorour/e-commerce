@@ -16,15 +16,8 @@ export default function UserNavHeader() {
   const handleLogout = async () => {
     setIsLoggingOut(true);
     try {
-      const res: any = await signOut();
-
-      if (res?.success) {
-        toast.success("Logged out successfully");
-        router.refresh();
-      } else {
-        toast.error("Something went wrong during logout.");
-      }
-    } catch (error) {
+      await signOut({ callbackUrl: "/" });
+    } catch {
       toast.error("Network error. Please try again.");
     } finally {
       setIsLoggingOut(false);

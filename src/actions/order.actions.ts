@@ -2,6 +2,8 @@
 
 import { getUserId, getToken } from "@/utils/realtoken";
 import { fetchApi } from "@/services/api";
+import { getErrorMessage } from "@/types/api";
+import { OrderFormValues, CreateOrderResponse } from "@/types/orders";
 
 
 const buildOrderEndpoint = (cartId: string, paymentMethod: string) => {
@@ -29,8 +31,8 @@ const createOrderRequest = async (
 
 export async function createOrder(
   cartId: string,
-  formValues: any,
-) {
+  formValues: OrderFormValues,
+): Promise<CreateOrderResponse> {
   try {
     const { paymentMethod, ...shippingAddress } = formValues;
 
@@ -50,10 +52,10 @@ export async function createOrder(
       ...data,
       status: true,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       status: false,
-      message: error.message || "Failed to create order",
+      message: getErrorMessage(error),
     };
   }
 }
@@ -71,10 +73,10 @@ export async function getUserOrders() {
       ...data,
       status: true,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       status: false,
-      message: error.message || "Failed to fetch orders",
+      message: getErrorMessage(error),
     };
   }
 }

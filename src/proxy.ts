@@ -1,5 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse, type NextRequest } from "next/server";
+import type { JWT } from "next-auth/jwt";
 
 const ROUTES = {
   protected: [
@@ -16,7 +17,7 @@ const ROUTES = {
 const isRouteMatch = (pathname: string, routes: string[]) =>
   routes.some((route) => pathname.startsWith(route));
 
-const isTokenValid = (token: any) =>
+const isTokenValid = (token: JWT | null) =>
   token && token.error !== "TokenExpired";
 
 const buildsigninUrl = (req: NextRequest, callbackPath: string) => {

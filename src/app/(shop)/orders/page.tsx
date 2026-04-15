@@ -5,6 +5,7 @@ import { getUserOrders } from "@/actions/order.actions";
 
 import OrderCard from "@/components/shared/OrderCard/OrderCard";
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
+import { OrderType } from "@/types/orders";
 
 
 export const dynamic = "force-dynamic";
@@ -14,7 +15,7 @@ export default async function AllOrdersPage() {
   
   
   const { status, ...orders } = resp;
-  const allOrders: any[] = status ? Object.values(orders) : [];
+  const allOrders: OrderType[] = status ? Object.values(orders) as OrderType[] : [];
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500 py-12">

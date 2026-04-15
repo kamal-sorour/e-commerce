@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, Shapes, Layers, PackageOpen } from 'lucide-react
 import PageBanner from '@/components/shared/PageBanner/PageBanner';
 import SectionHeading from '@/components/shared/SectionHeading/SectionHeading';
 import { getAllSubCategoriesOnCategory, getSpecificCategory } from '@/services/categories.services';
+import { SubCategory } from '@/types/categories';
 
 
 export default async function SubCategoriesPage({
@@ -76,7 +77,7 @@ export default async function SubCategoriesPage({
 
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full">
-              {subCategories.map((subCategory: any) => (
+              {subCategories.map((subCategory: SubCategory) => (
                 <Link
                   key={subCategory._id}
                   href={`/products?subcategory=${subCategory._id}`}

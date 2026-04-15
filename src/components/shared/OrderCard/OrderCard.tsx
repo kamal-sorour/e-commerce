@@ -19,9 +19,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+import { OrderType, OrderCartItem } from "@/types/orders";
 
 interface OrderCardProps {
-  order: any;
+  order: OrderType;
 }
 
 export default function OrderCard({ order }: OrderCardProps) {
@@ -29,7 +30,7 @@ export default function OrderCard({ order }: OrderCardProps) {
 
   
   const subtotal = order.cartItems.reduce(
-    (sum: number, item: any) => sum + item.price * item.count,
+    (sum: number, item: OrderCartItem) => sum + item.price * item.count,
     0
   );
 
@@ -141,7 +142,7 @@ export default function OrderCard({ order }: OrderCardProps) {
                   Order Items
                 </h3>
                 <div className="space-y-3">
-                  {order.cartItems.map((item: any, i: number) => (
+                  {order.cartItems.map((item: OrderCartItem, i: number) => (
                     <div
                       key={i}
                       className="flex items-center gap-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl p-4 shadow-sm"

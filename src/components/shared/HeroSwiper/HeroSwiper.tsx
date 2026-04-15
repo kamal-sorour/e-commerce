@@ -13,6 +13,8 @@ import {
   EffectFade,
 } from "swiper/modules";
 
+import type { Swiper as SwiperType } from "swiper";
+
 import {
   ChevronLeft,
   ChevronRight,
@@ -72,7 +74,7 @@ const slides = [
 export default function HeroSlider() {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
-  const [swiper, setSwiper] = useState<any>(null);
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [theme, setTheme] = useState<string | null>(null);
 
   useEffect(() => {
@@ -81,8 +83,11 @@ export default function HeroSlider() {
 
   useEffect(() => {
     if (swiper && prevRef.current && nextRef.current) {
-      swiper.params.navigation.prevEl = prevRef.current;
-      swiper.params.navigation.nextEl = nextRef.current;
+      const nav = swiper.params.navigation;
+      if (nav && typeof nav !== 'boolean') {
+        nav.prevEl = prevRef.current;
+        nav.nextEl = nextRef.current;
+      }
 
       swiper.navigation.destroy();
       swiper.navigation.init();

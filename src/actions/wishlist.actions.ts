@@ -3,6 +3,8 @@
 import { revalidatePath } from 'next/cache';
 import { fetchApi } from '@/services/api';
 import { getToken } from '@/utils/realtoken';
+import { getErrorMessage } from '@/types/api';
+import { WishlistActionResponse } from '@/types/wishlist';
 
 export const getWishlistItems = async () => {
   try {
@@ -19,13 +21,13 @@ export const getWishlistItems = async () => {
     
     return responseData;
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Get wishlist items error:', error);
-    return { success: false, message: error.message || "An error occurred", data: null };
+    return { success: false, message: getErrorMessage(error), data: null };
   }
 };  
 
-export const addToWishlist = async (productId: string) => {
+export const addToWishlist = async (productId: string): Promise<WishlistActionResponse> => {
   try {
     const token = await getToken();
 
@@ -43,13 +45,13 @@ export const addToWishlist = async (productId: string) => {
     revalidatePath('/wishlist');
     return { success: true, message: "Added to wishlist successfully" };
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Add to wishlist error:', error);
-    return { success: false, message: error.message || "An error occurred" };
+    return { success: false, message: getErrorMessage(error) };
   }
 };
 
-export const removeFromWishlist = async (productId: string) => {
+export const removeFromWishlist = async (productId: string): Promise<WishlistActionResponse> => {
   try {
     const token = await getToken();
     if (!token) {
@@ -65,8 +67,8 @@ export const removeFromWishlist = async (productId: string) => {
     revalidatePath('/wishlist');
     return { success: true, message: "Removed from wishlist successfully" };
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Remove from wishlist error:', error);
-    return { success: false, message: error.message || "An error occurred" }; 
+    return { success: false, message: getErrorMessage(error) }; 
   }
 };

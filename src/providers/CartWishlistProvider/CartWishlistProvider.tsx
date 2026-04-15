@@ -46,21 +46,23 @@ export default function CartWishlistProvider({ children }: { children: React.Rea
     }
 
     try {
-      const [cartRes, wishlistRes]: [any, any] = await Promise.all([
+      const [cartRes, wishlistRes] = await Promise.all([
         getCartItems(),
         getWishlistItems(),
       ]);
 
-      if (cartRes && cartRes.success !== false) {
-        const numItems = cartRes?.data?.numOfCartItems
-          ?? cartRes?.data?.data?.products?.length
+      if (cartRes && 'data' in cartRes) {
+        const data = cartRes.data;
+        const numItems = data?.numOfCartItems
+          ?? data?.data?.products?.length
           ?? 0;
         setCartCount(numItems);
       }
 
-      if (wishlistRes && wishlistRes.success !== false) {
-        const numItems = wishlistRes?.data?.data?.length
-          ?? wishlistRes?.data?.count
+      if (wishlistRes && 'data' in wishlistRes) {
+        const data = wishlistRes.data;
+        const numItems = data?.data?.length
+          ?? data?.count
           ?? 0;
         setWishlistCount(numItems);
       }

@@ -10,11 +10,13 @@ import { getWishlistItems } from "@/actions/wishlist.actions";
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import ViewToggle, { ViewType } from "@/components/shared/ViewToggle/ViewToggle";
 import WishlistProductCard from "@/components/shared/WishlistProductCard/WishlistProductCard";
+import { WishlistResponse } from "@/types/wishlist";
+import { ProductType } from "@/types/products";
 
 
 export default function WishlistPage() {
   const [view, setView] = useState<ViewType>("list");
-  const [wishlistDetails, setWishlistDetails] = useState<any | null>(null);
+  const [wishlistDetails, setWishlistDetails] = useState<WishlistResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -24,7 +26,9 @@ export default function WishlistPage() {
       setIsLoading(true);
       try {
         const res = await getWishlistItems();
-        setWishlistDetails(res);
+        if (res && 'data' in res) {
+          setWishlistDetails(res as WishlistResponse);
+        }
       } catch (error) {
         console.error("Failed to load wishlist");
       } finally {
@@ -65,15 +69,15 @@ export default function WishlistPage() {
             ${view === "grid" ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6" : ""}
             ${view === "bento" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 auto-rows-max" : ""}
           `}>
-            {products.map((product: any, idx: number) => (
+            {products.map((product: ProductType, idx: number) => (
               <WishlistProductCard
                 key={product._id}
                 product={product}
                 view={view}
                 index={idx} 
                 onRemove={(id) => {
-                  const updatedProducts = products.filter((p: any) => p._id !== id);
-                  setWishlistDetails({ ...wishlistDetails!, data: updatedProducts });
+                  const updatedProducts = products.filter((p: ProductType) => p._id !== id);
+                  setWishlistDetails({ ...wishlistDetails!, data: { ...wishlistDetails!.data, data: updatedProducts } });
                 }}
               />
             ))}

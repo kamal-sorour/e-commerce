@@ -17,7 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import { getCartItems } from "@/actions/cart.actions";
-import { CartResponse } from "@/types/cart";
+import { CartResponse, CartResponseData, CartData } from "@/types/cart";
 
 import CartCardProduct from "@/components/shared/CartCardProduct/CartCardProduct";
 import RemoveUserCart from "@/components/shared/RemoveUserCart/RemoveUserCart";
@@ -35,10 +35,10 @@ export default function CartPage() {
     const fetchCart = async () => {
       setIsLoading(true);
       try {
-        const res: any = await getCartItems();
+        const res = await getCartItems();
 
-        if (res && res.success !== false) {
-          setCartDetails(res);
+        if (res && 'data' in res && (res as CartResponse).data) {
+          setCartDetails(res as CartResponse);
         }
       } catch (error) {
         console.error("Failed to load cart");
@@ -123,7 +123,7 @@ export default function CartPage() {
                         data: {
                           ...cartDetails!.data!,
                           data: {
-                            ...(cartDetails!.data!.data as any),
+                            ...cartDetails!.data!.data as CartData,
                             products: [],
                             totalCartPrice: 0,
                           },

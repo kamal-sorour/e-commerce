@@ -63,7 +63,7 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
           router.push("/orders");
         } else {
           
-          window.open(resp.session.url, "_self");
+          window.open(resp.session?.url, "_self");
         }
       } else {
         toast.error(resp.error?.message || "Failed to place order.");

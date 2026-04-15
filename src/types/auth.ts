@@ -27,12 +27,3 @@ export type AuthorizeType = {
   tokenCredentials: string;
   role: string;
 };
-
-export type AuthOptionsType = {
-  providers: any[];
-  callbacks: {
-    jwt: (params: { token: any; user?: any }) => any;
-    session: (params: { session: any; token: any }) => any;
-  };
-};
-

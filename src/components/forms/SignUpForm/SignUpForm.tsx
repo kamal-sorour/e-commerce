@@ -53,8 +53,9 @@ export default function SignUpForm() {
         redirect: true,
         callbackUrl: '/',
       });
-    } catch (error: any) {
-      toast.error(error.message || 'Registration failed. Please try again.');
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Registration failed. Please try again.';
+      toast.error(message);
     } finally {
       reset();
     }
