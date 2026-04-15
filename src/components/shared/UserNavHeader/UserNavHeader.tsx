@@ -59,7 +59,6 @@ export default function UserNavHeader() {
             </span>
           </Link>
 
-          {/* Divider */}
           <div className="w-px h-3.5 bg-slate-300 dark:bg-slate-700" />
 
           <button
@@ -92,7 +91,6 @@ export default function UserNavHeader() {
             <span>Sign In</span>
           </Link>
 
-          {/* Divider */}
           <div className="w-px h-3.5 bg-slate-300 dark:bg-slate-700" />
 
           <Link

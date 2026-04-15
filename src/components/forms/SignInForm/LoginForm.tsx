@@ -72,7 +72,7 @@ export default function LoginForm() {
 
   return (
     <form className="space-y-5" onSubmit={handleSubmit(onSubmit)} noValidate>
-      {/* Email Input */}
+      
       <div className="space-y-1.5">
         <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
           Email Address
@@ -102,7 +102,7 @@ export default function LoginForm() {
         )}
       </div>
 
-      {/* Password Input */}
+      
       <div className="space-y-1.5">
         <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
           Password
@@ -131,7 +131,7 @@ export default function LoginForm() {
         )}
       </div>
 
-      {/* Submit Button */}
+      
       <Button
         type="submit"
         disabled={isSubmitting}

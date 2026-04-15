@@ -37,11 +37,11 @@ export default function OrderCard({ order }: OrderCardProps) {
     <Card className="w-full overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-sm hover:shadow-md transition-shadow duration-300">
       <CardContent className="p-0">
         
-        {/* ================= Header Area (Summary) ================= */}
+        
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 pb-4 sm:pb-6 gap-6">
           
           <div className="flex items-start gap-4 sm:gap-6 w-full">
-            {/* Main Image with Badge */}
+            
             <div className="relative shrink-0">
               <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex items-center justify-center p-2 overflow-hidden shadow-inner">
                 <Image
@@ -59,7 +59,7 @@ export default function OrderCard({ order }: OrderCardProps) {
               )}
             </div>
 
-            {/* Order Info */}
+            
             <div className="flex-1 min-w-0 flex flex-col justify-center py-1">
               <div className="flex items-center gap-2 mb-2">
                 {order.isPaid ? (
@@ -92,7 +92,7 @@ export default function OrderCard({ order }: OrderCardProps) {
             </div>
           </div>
 
-          {/* Device Icon (Optional, keeping as requested) */}
+          
           <div className="hidden sm:block">
             <Button variant="ghost" size="icon" className="h-10 w-10 rounded-xl bg-slate-50 dark:bg-slate-900 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400">
               <Monitor size={18} />
@@ -100,7 +100,7 @@ export default function OrderCard({ order }: OrderCardProps) {
           </div>
         </div>
 
-        {/* ================= Price & Toggle Area ================= */}
+        
         <div className="flex items-center justify-between px-6 pb-6">
           <div className="flex items-baseline gap-1">
             <span className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-50">
@@ -127,14 +127,14 @@ export default function OrderCard({ order }: OrderCardProps) {
           </Button>
         </div>
 
-        {/* ================= Expanded Details Area ================= */}
+        
         <div className={cn("grid transition-all duration-300 ease-in-out", expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}>
           <div className="overflow-hidden">
             <Separator className="bg-slate-100 dark:bg-slate-800" />
             
             <div className="p-6 space-y-8 bg-slate-50/50 dark:bg-slate-900/20">
               
-              {/* --- Items List --- */}
+              
               <div>
                 <h3 className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-slate-100 mb-4 uppercase tracking-wider">
                   <Package size={16} className="text-emerald-600 dark:text-emerald-500" />
@@ -179,7 +179,7 @@ export default function OrderCard({ order }: OrderCardProps) {
                 </div>
               </div>
 
-              {/* --- Order Summary (Receipt) --- */}
+              
               <div>
                  <h3 className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-slate-100 mb-4 uppercase tracking-wider">
                   <ReceiptText size={16} className="text-emerald-600 dark:text-emerald-500" />

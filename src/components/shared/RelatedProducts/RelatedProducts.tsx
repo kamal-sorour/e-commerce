@@ -20,7 +20,6 @@ export default function RelatedProducts({ productsSlider }: RelatedProductsProps
     <section className="py-8 md:py-12 border-t border-slate-200 dark:border-slate-800 mt-8">
       <div className="container mx-auto px-4">
         
-        {/* Header مع أزرار التحكم مدمجة بذكاء */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <SectionHeading textOne="You May Also" textTwo="Like" />
           

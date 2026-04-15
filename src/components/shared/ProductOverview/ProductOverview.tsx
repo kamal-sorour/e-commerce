@@ -33,7 +33,6 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
   return (
     <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 md:p-8 flex flex-col h-full">
       
-      {/* Badges */}
       <div className="flex flex-wrap gap-2 mb-4">
         <Badge variant="secondary" className="bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400 hover:bg-emerald-100 px-3 py-1 text-xs">
           {prod.category?.name}
@@ -43,7 +42,6 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
         </Badge>
       </div>
 
-      {/* Title & Rating */}
       <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-slate-50 leading-tight mb-4 tracking-tight">
         {prod.title}
       </h1>
@@ -59,7 +57,6 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
         </span>
       </div>
 
-      {/* Price Block */}
       <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-100 dark:border-slate-800 mb-6">
         {prod.priceAfterDiscount ? (
           <div className="flex items-center flex-wrap gap-4">
@@ -84,7 +81,6 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
         {prod.description}
       </p>
 
-      {/* Quantity & Total */}
       <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between mb-8 pb-8 border-b border-slate-100 dark:border-slate-800">
         <div>
           <label className="block text-sm font-bold text-slate-900 dark:text-slate-100 mb-3">
@@ -112,14 +108,12 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
           </div>
         </div>
 
-        {/* Dynamic Total Price */}
         <div className="text-right">
           <p className="text-sm font-bold text-slate-500 dark:text-slate-400 mb-1">Total Price</p>
           <p className="text-2xl font-black text-slate-900 dark:text-slate-50">{totalPrice} EGP</p>
         </div>
       </div>
 
-      {/* Action Buttons */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <AddToCartButton 
            isFromProductDetails
@@ -141,7 +135,6 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
         </Button>
       </div>
 
-      {/* Features Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-100 dark:border-slate-800 mt-auto">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-500 rounded-full flex items-center justify-center shrink-0">

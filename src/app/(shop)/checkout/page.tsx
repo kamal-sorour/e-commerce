@@ -13,13 +13,13 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500 py-12 px-4 relative overflow-hidden">
-      {/* Decorative Backgrounds */}
+      
       <div className="absolute top-0 right-0 w-125 h-125 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
       <div className="absolute bottom-0 left-0 w-125 h-125 bg-teal-500/10 rounded-full blur-[120px] pointer-events-none translate-y-1/2 -translate-x-1/3" />
 
       <div className="max-w-3xl mx-auto relative z-10">
         
-        {/* Checkout Header */}
+        
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 mb-6 shadow-inner ring-4 ring-white dark:ring-slate-900">
             <Lock size={32} strokeWidth={2} />
@@ -33,7 +33,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
           </p>
         </div>
 
-        {/* Form Container */}
+        
         <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 p-6 md:p-12">
           <CheckoutForm cartId={id} />
         </div>

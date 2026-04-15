@@ -73,12 +73,12 @@ export default function CatalogPagination({
 
   return (
     <div className="flex justify-center w-full py-8">
-      {/* Container بتصميم زجاجي فخم يناسب الدارك واللايت مود */}
+      
       <div className="bg-white dark:bg-slate-900 px-2 py-1.5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
         <Pagination>
           <PaginationContent className="gap-1">
             
-            {/* زرار السابق */}
+            
             <PaginationItem>
               <PaginationPrevious
                 href="#"
@@ -92,7 +92,7 @@ export default function CatalogPagination({
               />
             </PaginationItem>
 
-            {/* أرقام الصفحات */}
+            
             {generatePagination().map((page, index) => {
               if (page === 'ellipsis') {
                 return (
@@ -124,7 +124,7 @@ export default function CatalogPagination({
               );
             })}
 
-            {/* زرار التالي */}
+            
             <PaginationItem>
               <PaginationNext
                 href="#"

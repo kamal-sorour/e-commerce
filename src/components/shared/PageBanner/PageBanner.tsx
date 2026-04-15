@@ -25,12 +25,10 @@ export default function PageBanner({
 
   return (
     <div className={`relative w-full border-b ${getBannerTheme()} overflow-hidden transition-colors duration-500`}>
-      {/* إضاءة خلفية ناعمة جداً */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-50" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-50" />
       
       <div className="container mx-auto px-4 py-12 sm:py-16 relative z-10">
         
-        {/* Breadcrumb Navigation */}
         <nav className="flex items-center gap-2 text-sm text-slate-300/80 font-medium mb-8 flex-wrap">
           <Link className="hover:text-white transition-colors" href="/">
             Home
@@ -52,7 +50,6 @@ export default function PageBanner({
           <span className="text-white">{title}</span>
         </nav>
 
-        {/* Banner Content */}
         <div className="flex flex-col md:flex-row text-center md:text-start items-center gap-6">
           <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center shadow-lg border border-white/10 text-white">
             {icon}

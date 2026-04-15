@@ -49,7 +49,7 @@ export default function WishlistPage() {
       {products.length > 0 ? (
         <div className="container mx-auto px-4 max-w-7xl">
           
-          {/* Header Area with View Toggle */}
+          
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
             <div className="flex flex-col">
               <SectionHeading textOne="My" textTwo="Wishlist" />

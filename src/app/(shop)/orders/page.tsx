@@ -23,7 +23,7 @@ export default async function AllOrdersPage() {
         {status === true && allOrders.length > 0 ? (
           <div className="flex flex-col gap-8 w-full">
             
-            {/* ================= Header Section ================= */}
+            
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <SectionHeading 
                 textOne="My" 
@@ -35,7 +35,7 @@ export default async function AllOrdersPage() {
               </div>
             </div>
 
-            {/* ================= Orders List ================= */}
+            
             <div className="flex flex-col gap-6">
               {allOrders.map((order) => (
                 <OrderCard order={order} key={order?.id} />
@@ -48,11 +48,11 @@ export default async function AllOrdersPage() {
           <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
             
             <div className="relative mb-8 flex justify-center">
-              {/* أيقونة فخمة بخلفية زجاجية */}
+              
               <div className="w-32 h-32 rounded-[2rem] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none flex items-center justify-center z-10 relative group hover:-translate-y-2 transition-transform duration-500">
                 <ShoppingBag size={56} className="text-slate-300 dark:text-slate-600" strokeWidth={1.5} />
               </div>
-              {/* ظل وهمي تحت الأيقونة */}
+              
               <div className="absolute -bottom-6 w-24 h-4 bg-black/5 dark:bg-black/40 rounded-full blur-md" />
             </div>
 
@@ -72,7 +72,7 @@ export default async function AllOrdersPage() {
               <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
             </Link>
 
-            {/* روابط سريعة للمساعدة */}
+            
             <div className="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 flex items-center gap-6 text-sm font-medium text-slate-500 dark:text-slate-400">
                <Link href="/contact" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Need Help?</Link>
                <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-700" />

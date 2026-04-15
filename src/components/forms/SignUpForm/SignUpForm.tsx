@@ -72,7 +72,7 @@ export default function SignUpForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
       
-      {/* Name Input */}
+      
       <div className="space-y-1.5">
         <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Full Name</label>
         <Input
@@ -86,7 +86,7 @@ export default function SignUpForm() {
         {errors.name && <p className="text-xs font-semibold text-red-500 px-1">{errors.name.message}</p>}
       </div>
 
-      {/* Email Input */}
+      
       <div className="space-y-1.5">
         <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Email Address</label>
         <Input
@@ -104,7 +104,7 @@ export default function SignUpForm() {
         {errors.email && <p className="text-xs font-semibold text-red-500 px-1">{errors.email.message}</p>}
       </div>
 
-      {/* Password Input */}
+      
       <div className="space-y-1.5">
         <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Password</label>
         <div className="relative">
@@ -133,7 +133,7 @@ export default function SignUpForm() {
         {errors.password && <p className="text-xs font-semibold text-red-500 px-1">{errors.password.message}</p>}
       </div>
 
-      {/* Confirm Password Input */}
+      
       <div className="space-y-1.5">
         <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Confirm Password</label>
         <div className="relative">
@@ -157,7 +157,7 @@ export default function SignUpForm() {
         {errors.rePassword && <p className="text-xs font-semibold text-red-500 px-1">{errors.rePassword.message}</p>}
       </div>
 
-      {/* Phone Number Input */}
+      
       <div className="space-y-1.5">
         <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Phone Number</label>
         <div className="relative flex items-center">
@@ -188,7 +188,7 @@ export default function SignUpForm() {
       </div>
 
 
-      {/* Submit Button */}
+      
       <Button
         type="submit"
         disabled={isSubmitting}

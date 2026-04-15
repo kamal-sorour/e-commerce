@@ -68,7 +68,7 @@ export default function CartCardProduct({ product, view, index, price, quantity 
       <Card className={cn("bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all", isRemoving && "opacity-50 pointer-events-none")}>
         <CardContent className="p-4 sm:p-5">
           <div className="flex gap-4 sm:gap-6">
-            {/* Image */}
+            
             <Link href={`/products/${product._id}`} className="relative shrink-0 group">
               <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-slate-50 dark:bg-slate-800/50 p-3 border border-slate-100 dark:border-slate-800 overflow-hidden">
                 <Image
@@ -84,7 +84,7 @@ export default function CartCardProduct({ product, view, index, price, quantity 
               </Badge>
             </Link>
 
-            {/* Content */}
+            
             <div className="flex-1 min-w-0 flex flex-col py-1">
               <div className="mb-2">
                 <div className="flex items-center gap-2 mb-1.5">
@@ -107,7 +107,7 @@ export default function CartCardProduct({ product, view, index, price, quantity 
               </div>
 
               <div className="flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 dark:border-slate-800 pt-4">
-                {/* Quantity Controls */}
+                
                 <div className="flex items-center bg-slate-50 dark:bg-slate-800 rounded-xl p-1 border border-slate-200 dark:border-slate-700">
                   <Button onClick={() => updateQuantity(product._id, quantity - 1)} disabled={isUpdating || quantity <= 1} size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-slate-600 dark:text-slate-300">
                     <Minus size={14} />
@@ -150,14 +150,14 @@ export default function CartCardProduct({ product, view, index, price, quantity 
     )}>
       <CardContent className={cn("p-4 sm:p-5 flex flex-1 gap-4", isBentoLarge ? "flex-col md:flex-row items-center" : "flex-col")}>
         
-        {/* Image */}
+        
         <Link href={`/products/${product._id}`} className={cn("relative shrink-0 group w-full", isBentoLarge ? "md:w-1/2" : "")}>
           <div className="w-full aspect-square rounded-2xl bg-slate-50 dark:bg-slate-800/50 p-4 border border-slate-100 dark:border-slate-800 overflow-hidden">
             <Image src={product.imageCover} alt={product.title} width={300} height={300} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-sm dark:drop-shadow-none" />
           </div>
         </Link>
 
-        {/* Content */}
+        
         <div className="flex-1 flex flex-col w-full">
           <div className="mb-2">
             <Badge variant="outline" className="mb-2 bg-slate-50 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 border-slate-200 dark:border-slate-700 text-[10px] font-bold rounded-full w-fit">
@@ -174,7 +174,7 @@ export default function CartCardProduct({ product, view, index, price, quantity 
             <span className="text-slate-900 dark:text-white font-black text-lg">{price} EGP</span>
           </div>
 
-          {/* Controls */}
+          
           <div className="mt-auto border-t border-slate-100 dark:border-slate-800 pt-4 flex flex-col gap-3">
              <div className="flex items-center justify-between w-full">
                 <span className="text-xs font-bold text-slate-400">Total: <span className="text-emerald-600 dark:text-emerald-400 text-sm">{price * quantity} EGP</span></span>

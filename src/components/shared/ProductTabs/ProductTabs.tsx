@@ -70,10 +70,9 @@ function ProductReviewsTab({ productId, productInfo }: { productId: string, prod
   return (
     <div className="flex flex-col lg:flex-row gap-12 items-start max-w-6xl mx-auto">
       
-      {/* الجزء الأيسر: الإحصائيات وإضافة مراجعة */}
+      
       <div className="w-full lg:w-1/3 space-y-8 lg:sticky lg:top-8">
         
-        {/* إحصائيات التقييم */}
         <div className="bg-slate-50 dark:bg-slate-950/50 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 text-center">
           <div className="text-7xl font-black text-slate-900 dark:text-slate-50 mb-2">
             {productInfo.ratingsAverage?.toFixed(1) || "0.0"}
@@ -111,7 +110,6 @@ function ProductReviewsTab({ productId, productInfo }: { productId: string, prod
           </div>
         </div>
 
-        {/* فورم كتابة المراجعة (Disabled State) */}
         <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
           <div className="absolute inset-0 bg-slate-50/60 dark:bg-slate-950/60 backdrop-blur-[2px] z-10 flex flex-col items-center justify-center transition-opacity duration-300">
              <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-xl flex flex-col items-center text-center max-w-50 border border-slate-100 dark:border-slate-700">
@@ -141,7 +139,6 @@ function ProductReviewsTab({ productId, productInfo }: { productId: string, prod
         </div>
       </div>
 
-      {/* الجزء الأيمن: عرض المراجعات */}
       <div className="flex-1 w-full space-y-4">
         {isLoading ? (
           
@@ -205,7 +202,6 @@ function ProductReviewsTab({ productId, productInfo }: { productId: string, prod
               </div>
             ))}
 
-            {/* Local Pagination Controls */}
             {totalPages > 1 && (
               <div className="flex justify-center gap-2 pt-6">
                 {[...Array(totalPages)].map((_, i) => (
@@ -240,7 +236,6 @@ export default function ProductTabs({ productInfo }: ProductTabsProps) {
       <div className="bg-white dark:bg-slate-900 rounded-[2rem] shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden transition-colors">
         
         <Tabs defaultValue="details" className="w-full">
-          {/* تصميم الـ Tabs (Modern Pill Design) */}
           <div className="px-4 md:px-8 pt-6 pb-4 border-b border-slate-100 dark:border-slate-800 overflow-x-auto custom-scrollbar">
             <TabsList className="bg-slate-100 dark:bg-slate-950 p-1.5 rounded-2xl h-auto flex w-max min-w-full md:min-w-fit">
               <TabsTrigger value="details" className="flex-1 py-3 px-6 rounded-xl font-bold data-[state=active]:bg-white dark:data-[state=active]:bg-slate-800 data-[state=active]:text-emerald-600 dark:data-[state=active]:text-emerald-400 data-[state=active]:shadow-sm transition-all text-sm md:text-base gap-2">
@@ -255,7 +250,6 @@ export default function ProductTabs({ productInfo }: ProductTabsProps) {
             </TabsList>
           </div>
 
-          {/* محتوى التفاصيل */}
           <TabsContent value="details" className="p-6 md:p-10 animate-in fade-in duration-500 outline-none">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <div className="space-y-4">
@@ -303,12 +297,10 @@ export default function ProductTabs({ productInfo }: ProductTabsProps) {
             </div>
           </TabsContent>
 
-          {/* محتوى المراجعات */}
           <TabsContent value="reviews" className="p-6 md:p-10 animate-in fade-in duration-500 outline-none">
              <ProductReviewsTab productId={productInfo.id || productInfo._id} productInfo={productInfo} />
           </TabsContent>
 
-          {/* محتوى الشحن */}
           <TabsContent value="shipping" className="p-6 md:p-10 animate-in fade-in duration-500 outline-none">
              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="bg-slate-50 dark:bg-slate-950 rounded-3xl p-8 border border-slate-100 dark:border-slate-800 text-center flex flex-col items-center hover:-translate-y-1 transition-transform">

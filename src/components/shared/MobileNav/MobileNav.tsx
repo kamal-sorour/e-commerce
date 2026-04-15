@@ -61,7 +61,7 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
 
       <DrawerContent className="bg-slate-50 dark:bg-slate-950 border-l border-slate-200 dark:border-slate-800 rounded-none w-[85vw] max-w-sm ml-auto overflow-y-auto overflow-x-hidden h-full flex flex-col">
         
-        {/* Header */}
+        
         <DrawerHeader className="p-0 text-left shrink-0">
           <DrawerTitle className="sr-only">Mobile Menu</DrawerTitle>
           <div className="flex items-center justify-between p-5 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
@@ -80,10 +80,10 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
           </div>
         </DrawerHeader>
 
-        {/* Scrollable Content */}
+        
         <div className="flex-1 overflow-y-auto p-5 space-y-6">
           
-          {/* Search Box */}
+          
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -95,7 +95,7 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
             </div>
           </form>
 
-          {/* App-like Grid Menu */}
+          
           <div>
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-1">Menu</h4>
             <div className="grid grid-cols-2 gap-3">
@@ -118,7 +118,7 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
             </div>
           </div>
 
-          {/* Quick Actions (List Style) */}
+          
           <div>
             <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-1">My Cart</h4>
             <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
@@ -144,7 +144,7 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
           </div>
         </div>
 
-        {/* Footer (Auth Box) */}
+        
         <div className="p-5 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shrink-0">
           {status === "unauthenticated" ? (
             <div className="flex gap-3">

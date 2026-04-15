@@ -83,7 +83,7 @@ export default async function ShopCatalogPage({
               </div>
             </div>
 
-            {/* تم إلغاء FeaturedProducts واستخدام ProductCard مباشرة هنا */}
+            
             <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 w-full">
               {products.map((product) => (
                 <ProductCard key={product._id} product={product} />

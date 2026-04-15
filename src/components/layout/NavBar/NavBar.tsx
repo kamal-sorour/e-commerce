@@ -89,7 +89,7 @@ export default function Navbar({ className }: NavbarProps) {
         <div className="container mx-auto px-4">
           <nav className="flex items-center justify-between h-16 lg:h-20 gap-4">
             
-            {/* Logo */}
+            
             <Link className="shrink-0 transition-transform hover:scale-105 active:scale-95" href="/">
               <Image
                 alt="Yassify"
@@ -101,7 +101,7 @@ export default function Navbar({ className }: NavbarProps) {
               />
             </Link>
 
-            {/* Search Bar */}
+            
             <form className="hidden lg:flex flex-1 max-w-xl mx-4">
               <div className="relative w-full group">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
@@ -113,7 +113,7 @@ export default function Navbar({ className }: NavbarProps) {
               </div>
             </form>
 
-            {/* Desktop Navigation */}
+            
             <NavigationMenu className="hidden xl:flex">
               <NavigationMenuList className="gap-2">
                 {mainLinks.map((link) => (
@@ -133,7 +133,7 @@ export default function Navbar({ className }: NavbarProps) {
                   </NavigationMenuItem>
                 ))}
 
-                {/* ================= Mega Menu (Categories) ================= */}
+                
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent hover:bg-emerald-50 dark:hover:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 font-bold rounded-full transition-colors">
                     Categories
@@ -176,7 +176,7 @@ export default function Navbar({ className }: NavbarProps) {
               </NavigationMenuList>
             </NavigationMenu>
 
-            {/* Right Actions */}
+            
             <div className="flex items-center gap-2 lg:gap-4">
               
               <Link
@@ -192,7 +192,7 @@ export default function Navbar({ className }: NavbarProps) {
                 </div>
               </Link>
 
-              {/* Action Icons */}
+              
               <div className="flex items-center gap-1">
                 <Link href="/wishlist" className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors group">
                   <Heart size={22} strokeWidth={2} className="text-slate-700 dark:text-slate-300 group-hover:text-red-500 transition-colors" />
@@ -207,7 +207,7 @@ export default function Navbar({ className }: NavbarProps) {
 
               <Separator orientation="vertical" className="h-8 mx-1 hidden sm:block bg-slate-200 dark:bg-slate-800" />
 
-              {/* User Menu */}
+              
               {status === "unauthenticated" ? (
                 <Button
                   asChild
@@ -252,7 +252,7 @@ export default function Navbar({ className }: NavbarProps) {
                 </DropdownMenu>
               )}
               
-              {/* Mobile Drawer Trigger */}
+              
               <MobileNav status={status} sessionData={sessionData} />
             </div>
           </nav>

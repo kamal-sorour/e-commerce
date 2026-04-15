@@ -78,13 +78,13 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8" noValidate>
       
-      {/* ----------------- Shipping Address ----------------- */}
+      
       <div className="space-y-6">
         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-3">
           Shipping Information
         </h2>
 
-        {/* Details / Address */}
+        
         <div className="space-y-2">
           <Label htmlFor="details" className="text-slate-700 dark:text-slate-300 font-bold">Full Address Details</Label>
           <div className="relative">
@@ -100,7 +100,7 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* City */}
+          
           <div className="space-y-2">
             <Label htmlFor="city" className="text-slate-700 dark:text-slate-300 font-bold">City</Label>
             <div className="relative">
@@ -115,7 +115,7 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
             {errors.city && <p className="text-xs font-semibold text-red-500">{errors.city.message}</p>}
           </div>
 
-          {/* Postal Code */}
+          
           <div className="space-y-2">
             <Label htmlFor="postalCode" className="text-slate-700 dark:text-slate-300 font-bold">Postal Code</Label>
             <div className="relative">
@@ -131,7 +131,7 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
           </div>
         </div>
 
-        {/* Phone */}
+        
         <div className="space-y-2">
           <Label htmlFor="phone" className="text-slate-700 dark:text-slate-300 font-bold">Phone Number</Label>
           <div className="relative flex items-center">
@@ -163,7 +163,7 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
         </div>
       </div>
 
-      {/* ----------------- Payment Method ----------------- */}
+      
       <div className="space-y-6 pt-4">
         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 border-b border-slate-100 dark:border-slate-800 pb-3">
           Payment Method
@@ -179,7 +179,7 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
               defaultValue={field.value}
               className="grid grid-cols-1 sm:grid-cols-2 gap-4"
             >
-              {/* Card Payment Option */}
+              
               <Label
                 htmlFor="card"
                 className={cn(
@@ -195,7 +195,7 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
                 <span className="text-xs font-medium opacity-70">Pay securely via Stripe</span>
               </Label>
 
-              {/* Cash Payment Option */}
+              
               <Label
                 htmlFor="cash"
                 className={cn(
@@ -216,7 +216,7 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
         {errors.paymentMethod && <p className="text-xs font-semibold text-red-500">{errors.paymentMethod.message}</p>}
       </div>
 
-      {/* ----------------- Submit Button ----------------- */}
+      
       <div className="pt-6">
         <Button
           type="submit"

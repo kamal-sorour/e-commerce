@@ -25,10 +25,10 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           
-          {/* ================= Left Side: Contact Info ================= */}
+          
           <div className="lg:col-span-1 space-y-6">
             
-            {/* Info Cards */}
+            
             <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-8 shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 flex items-center justify-center shrink-0 ring-4 ring-emerald-50/50 dark:ring-emerald-900/20">
@@ -91,7 +91,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Social Links */}
+            
             <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-8 shadow-sm text-center">
               <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-5">Follow Us</h3>
               <div className="flex items-center justify-center gap-3">
@@ -114,10 +114,10 @@ export default function ContactPage() {
 
           </div>
 
-          {/* ================= Right Side: Form & Help Center ================= */}
+          
           <div className="lg:col-span-2 flex flex-col gap-6">
             
-            {/* The Form Box */}
+            
             <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 p-8 md:p-12 shadow-sm flex-1">
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 flex items-center justify-center ring-4 ring-emerald-50/50 dark:ring-emerald-900/20">
@@ -136,7 +136,7 @@ export default function ContactPage() {
               <ContactForm />
             </div>
 
-            {/* Help Center Promo Box */}
+            
             <div className="bg-linear-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-900/20 rounded-3xl p-8 border border-emerald-100 dark:border-emerald-900/30">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
                 <div className="w-14 h-14 rounded-2xl bg-white dark:bg-slate-900 flex items-center justify-center shrink-0 shadow-sm">

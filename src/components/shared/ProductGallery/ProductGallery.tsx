@@ -20,7 +20,6 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
 
   return (
     <div className="flex flex-col gap-4 w-full select-none">
-      {/* الصورة الرئيسية */}
       <div className="relative w-full aspect-square rounded-3xl overflow-hidden bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm">
         <Swiper
           style={{
@@ -50,7 +49,6 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
         </Swiper>
       </div>
 
-      {/* الصور المصغرة (Thumbnails) */}
       <div className="w-full">
         <Swiper
           onSwiper={setThumbsSwiper}

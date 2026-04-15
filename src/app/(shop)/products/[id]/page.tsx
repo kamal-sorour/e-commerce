@@ -37,7 +37,7 @@ export default async function ProductDetailsPage( props : ProductDetailsPageProp
       <section className="pt-8 pb-4">
         <div className="container mx-auto px-4">
           
-          {/* Main Grid: Gallery & Overview */}
+          
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
             <div className="lg:col-span-5 xl:col-span-4 lg:sticky lg:top-24 h-max">
               <ProductGallery images={productItem.images} />
@@ -47,13 +47,13 @@ export default async function ProductDetailsPage( props : ProductDetailsPageProp
             </div>
           </div>
 
-          {/* Product Info Tabs */}
+          
           <ProductTabs productInfo={productItem} />
           
         </div>
       </section>
 
-      {/* Suggestion Slider */}
+      
       <RelatedProducts productsSlider={relatedProducts} />
     </main>
   );

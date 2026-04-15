@@ -54,12 +54,10 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
   if (view === "list") {
     return (
       <Card className={cn("bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden group", isRemoving && "opacity-50 pointer-events-none")}>
-        {/* إضاءة حمراء خفيفة جداً في الخلفية عند الـ Hover */}
         <div className="absolute inset-0 bg-linear-to-r from-red-50/50 to-transparent dark:from-red-950/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
         
         <CardContent className="p-4 sm:p-6 flex flex-col sm:flex-row gap-6 relative z-10">
           
-          {/* الصورة */}
           <Link href={`/products/${product._id}`} className="relative shrink-0 flex justify-center sm:block">
             <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl bg-slate-50 dark:bg-slate-800/50 p-4 border border-slate-100 dark:border-slate-800 overflow-hidden">
               <Image
@@ -70,7 +68,6 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
                 className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-sm dark:drop-shadow-none"
               />
             </div>
-            {/* Status Badge */}
             <div className="absolute -bottom-2 -right-2">
               {isOutOfStock ? (
                 <Badge className="bg-red-500 hover:bg-red-600 text-white text-[10px] px-2.5 py-0.5 rounded-full flex items-center gap-1 border-2 border-white dark:border-slate-900">
@@ -84,7 +81,6 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
             </div>
           </Link>
 
-          {/* المحتوى */}
           <div className="flex-1 flex flex-col justify-center">
             <div className="mb-2">
               <Badge variant="outline" className="mb-2 bg-slate-50 dark:bg-slate-800 text-red-600 dark:text-red-400 border-slate-200 dark:border-slate-700 text-[10px] font-bold rounded-full w-fit">
@@ -108,7 +104,6 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
               )}
             </div>
 
-            {/* الأزرار */}
             <div className="flex flex-wrap items-center gap-3 mt-auto">
               <div className="w-full sm:w-auto flex-1 min-w-37.5">
                 <AddToCartButton
@@ -142,7 +137,6 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
       isBentoLarge ? "md:col-span-2 md:flex-row" : "" 
     )}>
       
-      {/* زر المسح الدائري (Floating) */}
       <Button
         onClick={removeProductFromWishlist}
         disabled={isRemoving}
@@ -155,7 +149,6 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
 
       <CardContent className={cn("p-4 sm:p-5 flex flex-1 gap-4", isBentoLarge ? "flex-col md:flex-row items-center" : "flex-col")}>
         
-        {/* Image */}
         <Link href={`/products/${product._id}`} className={cn("relative shrink-0 flex justify-center", isBentoLarge ? "md:w-1/2 w-full" : "w-full")}>
           <div className="w-full aspect-square rounded-2xl bg-slate-50 dark:bg-slate-800/50 p-4 border border-slate-100 dark:border-slate-800 overflow-hidden">
             <Image src={product.imageCover} alt={product.title} width={300} height={300} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 drop-shadow-sm dark:drop-shadow-none" />
@@ -169,7 +162,6 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
           </div>
         </Link>
 
-        {/* Content */}
         <div className="flex-1 flex flex-col w-full">
           <div className="mb-2 mt-2">
             <Badge variant="outline" className="mb-2 bg-slate-50 dark:bg-slate-800 text-red-600 dark:text-red-400 border-slate-200 dark:border-slate-700 text-[9px] font-bold rounded-full w-fit uppercase tracking-wider">
@@ -189,9 +181,7 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
             )}
           </div>
 
-          {/* Add to Cart Container */}
           <div className="mt-auto border-t border-slate-100 dark:border-slate-800 pt-4">
-             {/* استخدمنا الزرار العريض هنا برضه عشان يملى الكارت من تحت ويدي شكل Storefront احترافي */}
              <AddToCartButton productId={product._id} isFromProductDetails={true} />
           </div>
         </div>
