@@ -15,11 +15,11 @@ export default async function SubCategoriesPage({
 }) {
   const { id } = await params;
 
-  // جلب البيانات بشكل متوازي (Performance Boost) لو أمكن، أو بالترتيب
+  
   const category = await getSpecificCategory(id);
   const subCategoriesRes = await getAllSubCategoriesOnCategory(id);
   
-  // تأمين البيانات (Fallback)
+  
   const subCategories = subCategoriesRes || [];
   const resultsCount = subCategories.length;
 
@@ -108,7 +108,7 @@ export default async function SubCategoriesPage({
 
           </div>
         ) : (
-          /* ================= Empty State ================= */
+          
           <div className="flex flex-col items-center justify-center py-20 px-4 text-center max-w-lg mx-auto">
             <div className="w-24 h-24 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex items-center justify-center mb-6">
               <PackageOpen size={48} className="text-slate-400 dark:text-slate-500" strokeWidth={1.5} />

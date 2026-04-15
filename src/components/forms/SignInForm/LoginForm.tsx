@@ -5,18 +5,18 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm, Controller, set } from "react-hook-form";
-import { toast } from "sonner"; // Shadcn toast
+import { toast } from "sonner"; 
 import { Eye, EyeOff, Mail, Loader2, LogIn } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { formDataType } from "@/types/auth"; // تأكد من المسار
+import { formDataType } from "@/types/auth"; 
 
-// دالة حماية الـ URL الداخلي
+
 const isSafeUrl = (url: string | null): boolean => {
   if (!url) return false;
   try {
-    // URL آمن فقط إذا كان يبدأ بـ "/" ولا يبدأ بـ "//" (لمنع الـ Open Redirects)
+    
     return url.startsWith("/") && !url.startsWith("//");
   } catch {
     return false;

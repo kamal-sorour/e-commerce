@@ -31,7 +31,7 @@ export default function UserNavHeader() {
     }
   };
 
-  // يمنع الـ Layout Shift أثناء تحميل حالة الجلسة
+  
   if (status === "loading") {
     return (
       <div className="flex items-center gap-4 animate-pulse">
@@ -44,7 +44,7 @@ export default function UserNavHeader() {
   return (
     <div className="flex items-center gap-4 text-[13px] font-medium">
       {status === "authenticated" && session?.user ? (
-        /* ================= Authenticated State ================= */
+        
         <>
           <Link
             href="/profile"
@@ -79,7 +79,7 @@ export default function UserNavHeader() {
           </button>
         </>
       ) : (
-        /* ================= Unauthenticated State ================= */
+        
         <>
           <Link
             href="/signin"

@@ -12,7 +12,7 @@ interface RelatedProductsProps {
 }
 
 export default function RelatedProducts({ productsSlider }: RelatedProductsProps) {
-  const limitedProducts = productsSlider.slice(0, 10); // 10 منتجات كفاية
+  const limitedProducts = productsSlider.slice(0, 10); 
 
   if (!limitedProducts || limitedProducts.length === 0) return null;
 

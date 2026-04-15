@@ -26,20 +26,20 @@ export default async function ShopCatalogPage({
 }) {
   const { page = 1, brand, subcategory, category } = await searchParams;
 
-  // 1. تجهيز البراميترز للـ API الموحد
+  
   const queryParams: ProductQueryParams = { page };
   if (brand) queryParams.brand = brand;
-  // دمج البحث بالأقسام
+  
   if (subcategory) queryParams['category[in]'] = subcategory;
   else if (category) queryParams['category[in]'] = category;
 
-  // 2. جلب المنتجات
+  
   const productsResponse = await getProducts(queryParams);
   const products = productsResponse?.data || [];
   const metadata = productsResponse?.metadata || { currentPage: 1, numberOfPages: 1 };
 
 
-  // تحديد نصوص البانر
+  
   const bannerTitle = brand 
     ? `${products[0]?.brand?.name || 'Unknown'} Products`
       : category 
@@ -96,7 +96,7 @@ export default async function ShopCatalogPage({
             /> 
           </div>
         ) : (
-          /* Empty State - Solid Backgrounds only, no gradients */
+          
           <div className="flex flex-col items-center justify-center py-24 px-4 text-center max-w-lg mx-auto">
             <div className="w-24 h-24 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex items-center justify-center mb-6">
               <PackageOpen size={48} className="text-slate-400 dark:text-slate-500" strokeWidth={1.5} />

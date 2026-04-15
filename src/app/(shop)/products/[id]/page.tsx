@@ -7,11 +7,11 @@ import RelatedProducts from "@/components/shared/RelatedProducts/RelatedProducts
 import { getProductById, getProducts } from "@/services/products.services";
 
 interface ProductDetailsPageProps {
-  params: Promise<{ id: string }>; // غيرنا productId لـ id
+  params: Promise<{ id: string }>; 
 }
 
 export default async function ProductDetailsPage( props : ProductDetailsPageProps) {
-  // 2. سحب الـ id من الـ params
+  
   const { id } = await props.params; 
 //   console.log('Product ID from params:', id);
   
@@ -22,7 +22,7 @@ export default async function ProductDetailsPage( props : ProductDetailsPageProp
 
   
 
-  const productItem = productRes || null; // تأمين البيانات (Fallback)
+  const productItem = productRes || null; 
 
   const relatedProducts = relatedProductsRes?.data || [];
 

@@ -28,7 +28,7 @@ interface OrderCardProps {
 export default function OrderCard({ order }: OrderCardProps) {
   const [expanded, setExpanded] = useState(false);
 
-  // حساب التكلفة الفرعية إذا لم تكن موجودة جاهزة في الـ API
+  
   const subtotal = order.cartItems.reduce(
     (sum, item) => sum + item.price * item.count,
     0

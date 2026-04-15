@@ -77,7 +77,7 @@ export default async function CategoriesPage() {
             
           </div>
         ) : (
-          /* ================= حالة عدم وجود أقسام ================= */
+          
           <div className="flex flex-col items-center justify-center py-24 px-4 text-center max-w-lg mx-auto">
             <div className="w-24 h-24 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm flex items-center justify-center mb-6">
               <PackageOpen size={48} className="text-slate-400 dark:text-slate-500" strokeWidth={1.5} />

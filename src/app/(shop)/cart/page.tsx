@@ -27,7 +27,7 @@ export default function CartPage() {
       setIsLoading(true);
       try {
         const res = await getCartItems();
-        // نتأكد إن مفيش Error راجع وإن الداتا موجودة
+        
         if (res && res.success !== false) {
           setCartDetails(res);
         }

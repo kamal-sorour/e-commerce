@@ -9,8 +9,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-// import AddToCartButton from "../AddToCartButton/AddToCartButton";
-// import AddToWishlistButton from "../AddToWishlistButton/AddToWishlistButton";
+
+
 import { ProductType } from "@/types/products";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 import AddToWishlistButton from "../AddToWishlistButton/AddToWishlistButton";
@@ -20,7 +20,7 @@ interface ProductOverviewProps {
 }
 
 export default function ProductOverview({ prod }: ProductOverviewProps) {
-  // حالة الكمية لحساب السعر الإجمالي ديناميكياً
+  
   const [quantity, setQuantity] = useState(1);
   const currentPrice = prod.priceAfterDiscount || prod.price;
   const totalPrice = currentPrice * quantity;

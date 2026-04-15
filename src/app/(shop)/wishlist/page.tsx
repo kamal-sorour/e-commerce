@@ -11,14 +11,14 @@ import { wishlistResponse } from "@/interfaces/wishlist.interface";
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import ViewToggle, { ViewType } from "@/components/shared/ViewToggle/ViewToggle";
 import WishlistProductCard from "@/components/shared/WishlistProductCard/WishlistProductCard";
-// import { useWishlist } from "@/context/wishlistContext";
+
 
 export default function WishlistPage() {
   const [view, setView] = useState<ViewType>("list");
   const [wishlistDetails, setWishlistDetails] = useState<wishlistResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-//   const { updateNumOfWishlistItems } = useWishlist();
+
 
   useEffect(() => {
     const fetchWishlist = async () => {

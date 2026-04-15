@@ -59,7 +59,7 @@ const mainLinks = [
   { name: "Brands", href: "/brands" },
 ];
 
-// أضفنا أيقونات ووصف لكل قسم عشان الـ Mega Menu تبان احترافية
+
 const categories = [
   { id: "all", name: "All Categories", href: "/categories", icon: PackageSearch, desc: "Browse everything" },
   { id: "6439d61c0049ad0b52b90051", name: "Music", href: "/categories/6439d61c0049ad0b52b90051", icon: Music, desc: "Instruments & audio" },

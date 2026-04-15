@@ -29,13 +29,13 @@ export default function CatalogPagination({
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
     newPage: number
   ) => {
-    e.preventDefault(); // منع إعادة تحميل الصفحة الافتراضي
+    e.preventDefault(); 
     if (newPage === currentPage || newPage < 1 || newPage > numberOfPages) return;
 
-    // تحديث الرابط في المتصفح
+    
     router.push(`?page=${newPage}`);
 
-    // السكرول السلس (Smooth Scroll)
+    
     if (sectionId) {
       const section = document.getElementById(sectionId);
       if (section) {
@@ -46,18 +46,18 @@ export default function CatalogPagination({
     }
   };
 
-  // خوارزمية ذكية لتوليد أرقام الصفحات مع النقط (...) لو العدد كبير
+  
   const generatePagination = () => {
     const pages = [];
     const maxVisiblePages = 5;
 
     if (numberOfPages <= maxVisiblePages) {
-      // لو الصفحات قليلة، اعرضهم كلهم
+      
       for (let i = 1; i <= numberOfPages; i++) {
         pages.push(i);
       }
     } else {
-      // لو الصفحات كتير، اعرض أول صفحة، وآخر صفحة، والصفحات اللي حوالين الصفحة الحالية
+      
       if (currentPage <= 3) {
         pages.push(1, 2, 3, 4, 'ellipsis', numberOfPages);
       } else if (currentPage >= numberOfPages - 2) {

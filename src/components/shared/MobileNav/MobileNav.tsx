@@ -33,7 +33,7 @@ import {
 
 import logoImage from "@/assets/logo.png";
 
-// الروابط الرئيسية للموبايل
+
 const mainNavCards = [
   { name: "Home", href: "/", icon: Home, color: "text-blue-500", bg: "bg-blue-500/10" },
   { name: "Shop", href: "/products", icon: ShoppingBag, color: "text-emerald-500", bg: "bg-emerald-500/10" },

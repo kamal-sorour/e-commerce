@@ -7,7 +7,7 @@ import { NextAuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { fetchApi } from '@/services/api';
 import { jwtDecode } from 'jwt-decode';
-// import { AppSession, AppUser } from '../types/next-auth.types';
+
 
 export const nextAuthConfig: NextAuthOptions = {
   providers: [

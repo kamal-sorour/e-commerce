@@ -6,14 +6,14 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { addToWishlist } from "@/actions/wishlist.actions";
-// import { useWishlist } from "@/context/wishlistContext";
+
 import { cn } from "@/lib/utils";
 
 interface AddToWishlistButtonProps {
   productId: string;
   title?: string;
-  className?: string; // جعلناها اختيارية لأننا حطينا الستايلات الأساسية جوه
-  isFromProductDetails?: boolean; // لتحديد مكان الزرار
+  className?: string; 
+  isFromProductDetails?: boolean; 
 }
 
 export default function AddToWishlistButton({
@@ -22,7 +22,7 @@ export default function AddToWishlistButton({
   className,
   isFromProductDetails = false,
 }: AddToWishlistButtonProps) {
-  // const { updateNumOfWishlistItems } = useWishlist();
+  
   const [isLoading, setIsLoading] = useState(false);
 
   async function addProductToWishlist() {
@@ -43,7 +43,7 @@ export default function AddToWishlistButton({
     }
   }
 
-  // ===================== ستايل صفحة تفاصيل المنتج =====================
+  
   if (isFromProductDetails) {
     return (
       <Button
@@ -66,7 +66,7 @@ export default function AddToWishlistButton({
     );
   }
 
-  // ===================== ستايل كارت المنتج العادي =====================
+  
   return (
     <Button
       onClick={addProductToWishlist}

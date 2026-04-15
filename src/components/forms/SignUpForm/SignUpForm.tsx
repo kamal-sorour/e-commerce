@@ -60,7 +60,7 @@ export default function SignUpForm() {
     }
   };
 
-  // دالة لتحديد لون البار الخاص بقوة الباسورد
+  
   const getStrengthColor = (val: number) => {
     if (val === 0) return "bg-slate-200 dark:bg-slate-800";
     if (val < 25) return "bg-red-500";

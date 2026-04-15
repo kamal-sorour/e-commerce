@@ -17,13 +17,13 @@ import { toast } from "sonner";
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Fake submit function للتجربة فقط (بما إنها استاتيك)
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-      // هنا ممكن تحط Toast Success Message من Shadcn
+      
       toast.success("Your message has been sent! We'll get back to you soon.");
     }, 1500);
   };

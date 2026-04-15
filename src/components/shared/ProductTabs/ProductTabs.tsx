@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProductType } from "@/types/products";
-import { ReviewType } from "@/types/reviews"; // تأكد من مسار الاستيراد الصحيح
+import { ReviewType } from "@/types/reviews"; 
 import { getReviewsByProductId } from "@/services/reviews.services";
 
 import { 
@@ -18,29 +18,29 @@ interface ProductTabsProps {
   productInfo: ProductType;
 }
 
-// ============================================================================
-// 1. المكون الداخلي الخاص بالمراجعات (يُعالج جلب البيانات والتصفح محلياً)
-// ============================================================================
-// ============================================================================
-// 1. المكون الداخلي الخاص بالمراجعات (تم التعديل ليدعم Client-Side Pagination)
-// ============================================================================
+
+
+
+
+
+
 function ProductReviewsTab({ productId, productInfo }: { productId: string, productInfo: ProductType }) {
   const [allReviews, setAllReviews] = useState<ReviewType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   
-  // حدد عدد المراجعات في كل صفحة (مثلاً 4)
+  
   const REVIEWS_PER_PAGE = 4;
 
-  // جلب كل المراجعات مرة واحدة
+  
   useEffect(() => {
     const fetchReviews = async () => {
       setIsLoading(true);
       try {
-        // استدعاء الدالة بدون الـ currentPage
+        
         const res = await getReviewsByProductId(productId);
         
-        // التأكد من استخراج المصفوفة بشكل صحيح سواء كانت في res.data أو res مباشرة
+        
         const fetchedReviews = Array.isArray(res) ? res : (Array.isArray(res) ? res : []);
         setAllReviews(fetchedReviews);
       } catch (error) {
@@ -53,14 +53,14 @@ function ProductReviewsTab({ productId, productInfo }: { productId: string, prod
     fetchReviews();
   }, [productId]);
 
-  // حسابات الـ Client-Side Pagination
+  
   const totalPages = Math.ceil(allReviews.length / REVIEWS_PER_PAGE) || 1;
   const currentReviews = allReviews.slice(
     (currentPage - 1) * REVIEWS_PER_PAGE,
     currentPage * REVIEWS_PER_PAGE
   );
 
-  // حساب نسب النجوم بناءً على كل المراجعات
+  
   const distribution = [5, 4, 3, 2, 1].map((star) => {
     const count = allReviews.filter((r) => Math.round(r.rating) === star).length;
     const percent = allReviews.length > 0 ? Math.round((count / allReviews.length) * 100) : 0;
@@ -144,7 +144,7 @@ function ProductReviewsTab({ productId, productInfo }: { productId: string, prod
       {/* الجزء الأيمن: عرض المراجعات */}
       <div className="flex-1 w-full space-y-4">
         {isLoading ? (
-          // Skeleton Loader
+          
           [1, 2, 3].map((n) => (
             <div key={n} className="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 animate-pulse">
               <div className="flex gap-4 mb-4">
@@ -161,7 +161,7 @@ function ProductReviewsTab({ productId, productInfo }: { productId: string, prod
             </div>
           ))
         ) : allReviews.length === 0 ? (
-          // Empty State
+          
           <div className="flex flex-col items-center justify-center py-20 px-4 text-center bg-slate-50 dark:bg-slate-900/30 rounded-3xl border border-slate-100 dark:border-slate-800 border-dashed">
             <Star size={48} className="text-slate-300 dark:text-slate-700 mb-4" strokeWidth={1.5} />
             <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">No reviews yet</h3>
@@ -170,7 +170,7 @@ function ProductReviewsTab({ productId, productInfo }: { productId: string, prod
             </p>
           </div>
         ) : (
-          // Review List (عرض المراجعات المقطوعة للصفحة الحالية فقط)
+          
           <>
             {currentReviews.map((review) => (
               <div key={review._id} className="p-6 md:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
@@ -231,9 +231,9 @@ function ProductReviewsTab({ productId, productInfo }: { productId: string, prod
   );
 }
 
-// ============================================================================
-// 2. المكون الأساسي للتبويبات (Product Tabs)
-// ============================================================================
+
+
+
 export default function ProductTabs({ productInfo }: ProductTabsProps) {
   return (
     <section className="py-8">

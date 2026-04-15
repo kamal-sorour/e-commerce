@@ -7,13 +7,13 @@ import { order } from "@/interfaces/allorders.interface";
 import OrderCard from "@/components/shared/OrderCard/OrderCard";
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 
-// منع الكاشنج عشان الصفحة دي بالذات لازم تكون دايماً Up-to-date
+
 export const dynamic = "force-dynamic";
 
 export default async function AllOrdersPage() {
   const resp = await getUserOrders();
   
-  // فك البيانات بناءً على طريقة الـ API بتاعتك
+  
   const { status, ...orders } = resp;
   const allOrders: order[] = status ? Object.values(orders) : [];
 
@@ -45,7 +45,7 @@ export default async function AllOrdersPage() {
 
           </div>
         ) : (
-          /* ================= Empty State (No Orders) ================= */
+          
           <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
             
             <div className="relative mb-8 flex justify-center">

@@ -1,4 +1,4 @@
-// types/products.ts
+
 
 import { SubCategory } from "./categories";
 

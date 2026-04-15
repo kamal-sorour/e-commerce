@@ -1,4 +1,4 @@
-// services/products.service.ts
+
 
 import { ProductQueryParams, ProductsResponse, ProductType } from "@/types/products";
 import { fetchApi } from "./api";

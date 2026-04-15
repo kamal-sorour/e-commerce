@@ -6,13 +6,13 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { addToCart } from "@/actions/cart.actions";
-// import { useCart } from "@/context/CartContext";
+
 import { cn } from "@/lib/utils";
 
 interface AddToCartButtonProps {
   productId: string;
-  quantity?: number; // اختياري في حالة صفحة التفاصيل
-  isFromProductDetails?: boolean; // البروب الجديد لتحديد مكان الزرار
+  quantity?: number; 
+  isFromProductDetails?: boolean; 
 }
 
 export default function AddToCartButton({ 
@@ -21,13 +21,13 @@ export default function AddToCartButton({
   isFromProductDetails = false 
 }: AddToCartButtonProps) {
   
-//   const { updateNumOfCartItems } = useCart();
+
   const [isLoading, setIsLoading] = useState(false);
 
   async function addProductToCart() {
     setIsLoading(true);
     try {
-      // يمكنك تمرير الـ quantity للـ action إذا كان הـ API يدعم ذلك
+      
       const res = await addToCart(productId); 
       
       if (res.success) {

@@ -16,7 +16,7 @@ export default function PageBanner({
   subTitle2Link,
   icon,
 }: PageBannerProps) {
-  // تحديد لون خفيف للبانر بناءً على نوع الصفحة ليعطي طابع Premium بدون Gradients مزعجة
+  
   const getBannerTheme = () => {
     if (title === 'Top Brands') return 'bg-violet-900 dark:bg-violet-950 border-violet-800';
     if (title === 'Wishlist') return 'bg-rose-900 dark:bg-rose-950 border-rose-800';

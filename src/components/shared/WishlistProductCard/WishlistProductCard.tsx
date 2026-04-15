@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 import { removeFromWishlist } from "@/actions/wishlist.actions";
-// import { useWishlist } from "@/context/wishlistContext";
+
 import { ProductType } from "@/types/products";
 import { ViewType } from "@/components/shared/ViewToggle/ViewToggle";
 import AddToCartButton from "@/components/shared/AddToCartButton/AddToCartButton";
@@ -25,7 +25,7 @@ interface WishlistCardProps {
 }
 
 export default function WishlistProductCard({ product, view, index, onRemove }: WishlistCardProps) {
-//   const { updateNumOfWishlistItems } = useWishlist();
+
   const [isRemoving, setIsRemoving] = useState(false);
 
   async function removeProductFromWishlist() {
@@ -34,8 +34,8 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
       const res = await removeFromWishlist(product._id);
       if (res.success) {
         toast.success("Removed from wishlist");
-        // updateNumOfWishlistItems(res.numOfCartItems);
-        onRemove(product._id); // إخبار الصفحة الأم بحذف العنصر من الـ State
+        
+        onRemove(product._id); 
       } else {
         toast.error(res.message || "Failed to remove item");
       }
@@ -48,9 +48,9 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
 
   const isOutOfStock = product.quantity === 0;
 
-  // ==================== ستايلات العرض (Views) ====================
   
-  // 1. List View (كارت أفقي فخم)
+  
+  
   if (view === "list") {
     return (
       <Card className={cn("bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden group", isRemoving && "opacity-50 pointer-events-none")}>
@@ -113,7 +113,7 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
               <div className="w-full sm:w-auto flex-1 min-w-37.5">
                 <AddToCartButton
                   productId={product._id}
-                  isFromProductDetails={true} // عشان ياخد الشكل العريض اللي عملناه
+                  isFromProductDetails={true} 
                 />
               </div>
               <Button
@@ -132,7 +132,7 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
     );
   }
 
-  // 2. Grid & Bento View (كارت عمودي)
+  
   const isBentoLarge = view === "bento" && index % 3 === 0;
 
   return (

@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { removeCartProduct, updateProductQuantity } from "@/actions/cart.actions";
-// import { useCart } from "@/context/CartContext";
+
 import { ViewType } from "@/components/shared/ViewToggle/ViewToggle";
 import { cn } from "@/lib/utils";
 import { ProductType } from "@/types/products";
@@ -23,7 +23,7 @@ interface CartCardProps {
 }
 
 export default function CartCardProduct({ product, view, index, price, quantity }: CartCardProps) {
-//   const { updateNumOfCartItems } = useCart();
+
   const [isUpdating, setIsUpdating] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
 
@@ -33,7 +33,7 @@ export default function CartCardProduct({ product, view, index, price, quantity 
     try {
       const resp = await updateProductQuantity(id, quantity);
       if (resp.status) {
-        // updateNumOfCartItems(resp.numOfCartItems);
+        
         toast.success("done updated");
       } else {
         toast.error(resp.message);
@@ -54,14 +54,14 @@ export default function CartCardProduct({ product, view, index, price, quantity 
         toast.error(response.message);
       }
     } finally {
-      // إما أن المكون سيختفي أو نعيد الحالة
+      
       setIsRemoving(false); 
     }
   }
 
-  // ==================== ستايلات العرض (Views) ====================
   
-  // 1. List View (الافتراضي)
+  
+  
   if (view === "list") {
     return (
       <Card className={cn("bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all", isRemoving && "opacity-50 pointer-events-none")}>
@@ -138,14 +138,14 @@ export default function CartCardProduct({ product, view, index, price, quantity 
     );
   }
 
-  // 2. Grid & Bento View
+  
   const isBentoLarge = view === "bento" && index % 3 === 0;
 
   return (
     <Card className={cn(
       "bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col", 
       isRemoving && "opacity-50 pointer-events-none",
-      isBentoLarge ? "md:col-span-2 md:flex-row" : "" // في الـ Bento الكارت الأول بياخد مساحة أكبر
+      isBentoLarge ? "md:col-span-2 md:flex-row" : "" 
     )}>
       <CardContent className={cn("p-4 sm:p-5 flex flex-1 gap-4", isBentoLarge ? "flex-col md:flex-row items-center" : "flex-col")}>
         

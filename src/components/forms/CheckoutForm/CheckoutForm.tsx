@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 import { createOrder } from "@/actions/order.actions";
-// import { useCart } from "@/context/CartContext";
+
 import { cn } from "@/lib/utils";
 
 interface CheckoutFormProps {
@@ -32,7 +32,7 @@ type CheckoutFormData = {
 
 export default function CheckoutForm({ cartId }: CheckoutFormProps) {
   const router = useRouter();
-//   const { updateNumOfCartItems } = useCart();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -59,10 +59,10 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
       if (resp.status) {
         if (data.paymentMethod === "cash") {
           toast.success(resp.message || "Order placed successfully!");
-        //   updateNumOfCartItems(0); // تصفير السلة
+        
           router.push("/orders");
         } else {
-          // التوجيه لصفحة دفع Stripe مثلاً
+          
           window.open(resp.session.url, "_self");
         }
       } else {

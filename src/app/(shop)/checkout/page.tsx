@@ -1,5 +1,5 @@
 import { ShieldCheck, Lock } from "lucide-react";
-import CheckoutForm from "@/components/forms/CheckoutForm/CheckoutForm"; // تأكد من المسار
+import CheckoutForm from "@/components/forms/CheckoutForm/CheckoutForm"; 
 
 interface CheckoutPageProps {
   searchParams: Promise<{
@@ -8,7 +8,7 @@ interface CheckoutPageProps {
 }
 
 export default async function CheckoutPage({ searchParams }: CheckoutPageProps) {
-  // فك الوعد (Promise) حسب تحديثات Next.js 15
+  
   const { id } = await searchParams;
 
   return (
