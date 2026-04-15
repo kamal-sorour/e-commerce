@@ -47,12 +47,12 @@ export default function SignUpForm() {
 
       toast.success('Account created successfully! Logging you in...');
 
-    //   await signIn('credentials', {
-    //     email: data.email,
-    //     password: data.password,
-    //     redirect: true,
-    //     callbackUrl: '/',
-    //   });
+      await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: true,
+        callbackUrl: '/',
+      });
     } catch (error: any) {
       toast.error(error.message || 'Registration failed. Please try again.');
     } finally {

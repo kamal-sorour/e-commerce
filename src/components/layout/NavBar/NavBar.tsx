@@ -93,9 +93,9 @@ export default function Navbar({ className }: NavbarProps) {
             <Link className="shrink-0 transition-transform hover:scale-105 active:scale-95" href="/">
               <Image
                 alt="Yassify"
-                width={140}
-                height={30}
-                className="dark:invert w-auto h-7 lg:h-8"
+                width={161}
+                height={41}
+                className="dark:invert w-auto h-auto"
                 src={logoImage.src}
                 priority
               />
@@ -238,7 +238,7 @@ export default function Navbar({ className }: NavbarProps) {
                         <Link href="/profile"><User className="h-4 w-4 mr-2" /> Profile</Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild className="rounded-xl cursor-pointer px-3 py-2.5 font-medium hover:bg-emerald-50 dark:hover:bg-slate-900 hover:text-emerald-600 dark:hover:text-emerald-400">
-                        <Link href="/allorders"><ShoppingCart className="h-4 w-4 mr-2" /> My Orders</Link>
+                        <Link href="/orders"><ShoppingCart className="h-4 w-4 mr-2" /> My Orders</Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem asChild className="rounded-xl cursor-pointer px-3 py-2.5 font-medium hover:bg-emerald-50 dark:hover:bg-slate-900 hover:text-emerald-600 dark:hover:text-emerald-400">
                         <Link href="/settings"><Settings className="h-4 w-4 mr-2" /> Settings</Link>

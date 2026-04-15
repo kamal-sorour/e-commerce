@@ -1,7 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse, type NextRequest } from "next/server";
 
-// ================== ROUTES CONFIG ==================
 const ROUTES = {
   protected: [
     "/cart",
@@ -38,12 +37,10 @@ export async function proxy(req: NextRequest) {
   const isProtectedRoute = isRouteMatch(pathname, ROUTES.protected);
   const isAuthRoute = isRouteMatch(pathname, ROUTES.auth);
 
-  // 🚫 Block unauthenticated users from protected routes
   if (isProtectedRoute && !isTokenValid(token)) {
     return NextResponse.redirect(buildsigninUrl(req, pathname));
   }
 
-  // 🔄 Prevent logged-in users from visiting auth pages
   if (isAuthRoute && isTokenValid(token)) {
     return NextResponse.redirect(new URL("/", req.url));
   }

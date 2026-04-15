@@ -4,6 +4,8 @@ import { ProductType } from "@/types/products";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import AddToCartButton from "../AddToCartButton/AddToCartButton";
+import AddToWishlistButton from "../AddToWishlistButton/AddToWishlistButton";
 
 interface Props {
   product: ProductType;
@@ -70,9 +72,9 @@ export default function ProductCard({ product }: Props) {
         )}
 
         <div className="absolute top-3 right-3 flex flex-col gap-2 translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
-          {/* <div className="hover:scale-110 transition-transform">
-            <WishListBtn productId={_id} />
-          </div> */}
+           <div className="hover:scale-110 transition-transform">
+            <AddToWishlistButton productId={_id}  />
+          </div> 
 
           <Button
             size="icon"
@@ -137,9 +139,9 @@ export default function ProductCard({ product }: Props) {
             )}
           </div>
 
-          {/* <div className="shrink-0 z-10">
-            <AddToCart productId={_id} quantity={quantity} />
-          </div> */}
+           <div className="shrink-0 z-10">
+            <AddToCartButton productId={product._id}  />  
+          </div> 
         </div>
       </div>
     </div>

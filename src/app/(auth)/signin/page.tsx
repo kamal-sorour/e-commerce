@@ -4,8 +4,8 @@ import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { Truck, ShieldCheck, Clock, Lock, Users, Star } from 'lucide-react';
 
-import LoginImage from '@/assets/logo.png'; // تأكد من مسار الصورة
-import LoginForm from '@/components/forms/SignInForm/LoginForm'; // تأكد من مسار الفورم
+import LoginImage from '@/assets/logo.png'; 
+import LoginForm from '@/components/forms/SignInForm/LoginForm'; 
 
 
 
@@ -13,10 +13,8 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950 flex transition-colors duration-500">
       
-      {/* ================= Left Side (Image & Branding) ================= */}
       <div className="hidden lg:flex w-1/2 bg-slate-900 relative overflow-hidden flex-col justify-between">
         
-        {/* الصورة مع تأثير التدرج الأسود عشان النصوص تبان */}
         <div className="absolute inset-0 z-0">
           <Image
             src={LoginImage}
@@ -29,7 +27,6 @@ export default function LoginPage() {
           <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/60 to-transparent" />
         </div>
 
-        {/* المحتوى فوق الصورة */}
         <div className="relative z-10 p-12 xl:p-16 h-full flex flex-col justify-between">
           <Link href="/" className="inline-block">
              <h2 className="text-3xl font-black text-white tracking-tight">
@@ -60,9 +57,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* ================= Right Side (Login Form) ================= */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 relative">
-        {/* Decorative Blur for right side */}
         <div className="absolute top-0 right-0 w-100 h-100 bg-emerald-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
         
         <div className="w-full max-w-md relative z-10">
@@ -75,7 +70,6 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* الفورم (مغلف بـ Suspense عشان استخدام useSearchParams جواه) */}
           <Suspense fallback={<div className="h-64 flex items-center justify-center text-slate-500">Loading form...</div>}>
             <LoginForm />
           </Suspense>
@@ -92,7 +86,6 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* Trust Badges */}
           <div className="flex items-center justify-center gap-6 mt-10 text-xs font-bold text-slate-400 dark:text-slate-500">
             <div className="flex items-center gap-1.5">
               <Lock size={14} /> SSL Secured

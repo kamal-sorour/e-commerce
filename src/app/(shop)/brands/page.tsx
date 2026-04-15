@@ -9,7 +9,6 @@ import { BrandType } from "@/types/brands";
 import defaultBrandImage from "@/assets/logo.png";
 
 export default async function BrandsPage() {
-  // جلب البيانات مع وضع Fallback لحماية الصفحة من الـ Crash
   const brands: BrandType[] = (await getAllBrands()) || [];
 
   return (
@@ -18,7 +17,7 @@ export default async function BrandsPage() {
         title="All Brands"
         subTitle="Discover and shop from your favorite top-tier brands."
         subTitle2Link="/brands"
-        icon={<Award size={32} />} // غيرنا الأيقونة لـ Award لأنها بتليق أكتر مع البراندات
+        icon={<Award size={32} />}
       />
 
       <div className="container mx-auto px-4 py-12 flex flex-col gap-8">

@@ -41,7 +41,7 @@ export const nextAuthConfig: NextAuthOptions = {
           }
 
           const data: AuthResponse = await res.data;
-          console.log('API response:', data.token);
+          // console.log('API response:', data.token);
           const decodedToken = jwtDecode<DecodedToken>(data.token);
 
         

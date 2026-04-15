@@ -12,6 +12,8 @@ import { Badge } from "@/components/ui/badge";
 // import AddToCartButton from "../AddToCartButton/AddToCartButton";
 // import AddToWishlistButton from "../AddToWishlistButton/AddToWishlistButton";
 import { ProductType } from "@/types/products";
+import AddToCartButton from "../AddToCartButton/AddToCartButton";
+import AddToWishlistButton from "../AddToWishlistButton/AddToWishlistButton";
 
 interface ProductOverviewProps {
   prod: ProductType;
@@ -90,13 +92,13 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
           </label>
           <div className="flex items-center gap-4">
             <div className="flex items-center bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 p-1">
-              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("dec")} disabled={quantity <= 1} className="h-10 w-10 rounded-lg">
+              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("dec")} disabled className="h-10 w-10 rounded-lg">
                 <Minus size={16} />
               </Button>
               <div className="w-12 text-center font-bold text-lg text-slate-900 dark:text-slate-100">
                 {quantity}
               </div>
-              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("inc")} disabled={quantity >= prod.quantity} className="h-10 w-10 rounded-lg">
+              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("inc")} disabled className="h-10 w-10 rounded-lg">
                 <Plus size={16} />
               </Button>
             </div>
@@ -119,22 +121,20 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
 
       {/* Action Buttons */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-        <Button 
-        //   productId={prod.id}
-        //   quantity={quantity} // تمرير الكمية هنا مهم
-          className="w-full h-14 bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-transform active:scale-[0.98]"
-        //   title={<><ShoppingCart size={20}/> Add to Cart</>}
-        />
+        <AddToCartButton 
+           isFromProductDetails
+           productId={prod.id}
+/>
         <Button className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-transform active:scale-[0.98]">
           <Zap size={20} className="fill-white" /> Buy Now
         </Button>
       </div>
 
       <div className="flex gap-4 mb-8">
-        <Button 
-        //   productId={prod.id}
+        <AddToWishlistButton 
+          productId={prod.id}
+          isFromProductDetails
           className="flex-1 h-12 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 hover:border-red-500 dark:hover:border-red-500 hover:text-red-500 text-slate-700 dark:text-slate-300 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors"
-        //   title="Add to Wishlist"
         />
         <Button variant="outline" size="icon" className="h-12 w-12 rounded-xl border-2 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">
           <Share2 size={20} />

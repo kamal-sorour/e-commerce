@@ -47,7 +47,7 @@ export default function UserNavHeader() {
         /* ================= Authenticated State ================= */
         <>
           <Link
-            href="/profile/address"
+            href="/profile"
             className="group flex items-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
           >
             <User
@@ -82,7 +82,7 @@ export default function UserNavHeader() {
         /* ================= Unauthenticated State ================= */
         <>
           <Link
-            href="/login"
+            href="/signin"
             className="group flex items-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
           >
             <User
@@ -96,7 +96,7 @@ export default function UserNavHeader() {
           <div className="w-px h-3.5 bg-slate-300 dark:bg-slate-700" />
 
           <Link
-            href="/register"
+            href="/signup"
             className="group flex items-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
           >
             <UserPlus

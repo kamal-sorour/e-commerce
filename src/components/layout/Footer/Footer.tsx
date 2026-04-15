@@ -31,7 +31,7 @@ const footerLinks = {
   ],
   account: [
     { label: "My Account", href: "/profile" },
-    { label: "Order History", href: "/allorders" },
+    { label: "Order History", href: "/orders" },
     { label: "Wishlist", href: "/wishlist" },
     { label: "Shopping Cart", href: "/cart" },
     { label: "Sign In", href: "/signin" },

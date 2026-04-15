@@ -69,7 +69,7 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
               alt="Yassify"
               width={120}
               height={24}
-              className="h-6 w-auto dark:invert transition-all"
+              className="h-auto w-auto dark:invert transition-all"
               src={logoImage.src}
             />
             <DrawerClose asChild>
@@ -158,7 +158,7 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
               </DrawerClose>
               <DrawerClose asChild>
                 <Link
-                  href="/register"
+                  href="/signup"
                   className="flex-1 flex items-center justify-center py-3.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold hover:bg-slate-200 dark:hover:bg-slate-700 active:scale-95 transition-all"
                 >
                   Sign Up
