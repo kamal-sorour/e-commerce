@@ -69,7 +69,7 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
               alt="Yassify"
               width={120}
               height={24}
-              className="h-7 w-auto dark:invert transition-all"
+              className="h-auto w-auto dark:invert transition-all"
               src={logoImage.src}
             />
             <DrawerClose asChild>

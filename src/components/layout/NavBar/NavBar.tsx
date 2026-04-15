@@ -95,7 +95,7 @@ export default function Navbar({ className }: NavbarProps) {
                 alt="Yassify"
                 width={161}
                 height={41}
-                className="dark:invert w-auto h-auto"
+                className="dark:invert w-auto h-7"
                 src={logoImage.src}
                 priority
               />
