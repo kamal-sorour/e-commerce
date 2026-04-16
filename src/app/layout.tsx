@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Providers from "@/providers/Providers/Providers";
 
 const exo = Exo({
-  variable: "--font-exo",
+  variable: "--font-exo-custom",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"], 
 });
