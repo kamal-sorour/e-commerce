@@ -3,29 +3,22 @@ import { NextResponse, type NextRequest } from "next/server";
 import type { JWT } from "next-auth/jwt";
 
 const ROUTES = {
-  protected: [
-    "/cart",
-    "/wishlist",
-    "/checkout",
-    "/profile",
-    "/orders"
-  ],
+  protected: ["/cart", "/wishlist", "/checkout", "/profile", "/orders"],
   auth: ["/signin", "/signup"],
 };
 
 const isRouteMatch = (pathname: string, routes: string[]) =>
   routes.some((route) => pathname.startsWith(route));
 
-const isTokenValid = (token: JWT | null) =>
-  token && token.error !== "TokenExpired";
+const isTokenValid = (token: JWT | null) => !!token;
 
-const buildsigninUrl = (req: NextRequest, callbackPath: string) => {
+const buildSignInUrl = (req: NextRequest, callbackPath: string) => {
   const url = new URL("/signin", req.url);
   url.searchParams.set("callbackUrl", callbackPath);
   return url;
 };
 
-export async function proxy(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   const token = await getToken({
@@ -37,7 +30,7 @@ export async function proxy(req: NextRequest) {
   const isAuthRoute = isRouteMatch(pathname, ROUTES.auth);
 
   if (isProtectedRoute && !isTokenValid(token)) {
-    return NextResponse.redirect(buildsigninUrl(req, pathname));
+    return NextResponse.redirect(buildSignInUrl(req, pathname));
   }
 
   if (isAuthRoute && isTokenValid(token)) {
@@ -48,12 +41,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/cart",
-    "/wishlist",
-    "/checkout",
-    "/orders",
-    "/signin",
-    "/signup",
-  ],
+  matcher: ["/cart", "/wishlist", "/checkout", "/orders", "/signin", "/signup"],
 };
