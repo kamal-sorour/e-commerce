@@ -84,7 +84,7 @@ export default function RootLayout({
       lang="en"
       className={`${exo.variable} h-full antialiased`}
     >
-      <body className="antialiased">
+      <body className="antialiased font-exo">
         <Providers>
           <Navbar />
           <Toaster position="top-right" />
