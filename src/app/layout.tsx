@@ -1,21 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { Exo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/NavBar/NavBar";
 import Footer from "@/components/layout/Footer/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import Providers from "@/providers/Providers/Providers";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const exo = Exo({
   variable: "--font-exo",
