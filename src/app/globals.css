@@ -125,6 +125,6 @@
     @apply bg-background text-foreground;
   }
   html {
-    @apply font-exo;
+  font-family: var(--font-exo), sans-serif;
   }
 }
