@@ -123,8 +123,6 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-  html {
-  font-family: var(--font-exo), sans-serif;
+    font-family: var(--font-exo), sans-serif;
   }
 }
