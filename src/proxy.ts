@@ -8,8 +8,7 @@ const ROUTES = {
     "/wishlist",
     "/checkout",
     "/profile",
-    "/orders",
-    "/profile/settings",
+    "/orders"
   ],
   auth: ["/signin", "/signup"],
 };
@@ -32,7 +31,6 @@ export async function proxy(req: NextRequest) {
   const token = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
-    cookieName: "next-auth.session-token",
   });
 
   const isProtectedRoute = isRouteMatch(pathname, ROUTES.protected);
@@ -54,8 +52,7 @@ export const config = {
     "/cart",
     "/wishlist",
     "/checkout",
-    "/profile/:path*",
-    "/settings",
+    "/orders",
     "/signin",
     "/signup",
   ],
