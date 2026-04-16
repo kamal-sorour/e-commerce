@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import ProductBreadcrumbs from "@/components/shared/ProductBreadcrumbs/ProductBreadcrumbs";
 import ProductGallery from "@/components/shared/ProductGallery/ProductGallery";
 import ProductOverview from "@/components/shared/ProductOverview/ProductOverview";
@@ -10,7 +11,47 @@ interface ProductDetailsPageProps {
   params: Promise<{ id: string }>; 
 }
 
-export default async function ProductDetailsPage( props : ProductDetailsPageProps) {
+export async function generateMetadata({ params }: ProductDetailsPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const product = await getProductById(id);
+
+  if (!product) {
+    return {
+      title: "Product Not Found",
+      description: "The requested product could not be found.",
+    };
+  }
+
+  const title = product.title;
+  const description = product.description?.slice(0, 160) || `Shop ${product.title} at Yassify. ${product.category?.name} — Fresh quality guaranteed.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: `${title} | Yassify`,
+      description,
+      images: product.imageCover ? [
+        {
+          url: product.imageCover,
+          width: 800,
+          height: 800,
+          alt: title,
+        },
+      ] : [],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | Yassify`,
+      description,
+      images: product.imageCover ? [product.imageCover] : [],
+    },
+    alternates: {
+      canonical: `/products/${id}`,
+    },
+  };
+}export default async function ProductDetailsPage( props : ProductDetailsPageProps) {
   
   const { id } = await props.params; 
 //   console.log('Product ID from params:', id);
