@@ -23,7 +23,7 @@ const exo = Exo({
   weight: ["400", "500", "600", "700"], 
 });
 
-const siteUrl = process.env.NEXTAUTH_URL || "https://yassify.store";
+const siteUrl = process.env.NEXTAUTH_URL || "https://yassify.netlify.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     "dairy", "pantry", "delivery", "Yassify", "e-commerce", "fresh food",
     "organic", "shopping", "Egypt", "Cairo",
   ],
-  authors: [{ name: "Yassify Team" }],
-  creator: "Yassify",
-  publisher: "Yassify",
+  authors: [{ name: "Kamal Mohamed"}],
+  creator: "Kamal Mohamed",
+  publisher: "Kamal Mohamed",
   robots: {
     index: true,
     follow: true,
@@ -93,7 +93,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${exo.variable} h-full antialiased`}
+      className={`${exo.variable} h-full antialiased`}
     >
       <body className="antialiased">
         <Providers>
