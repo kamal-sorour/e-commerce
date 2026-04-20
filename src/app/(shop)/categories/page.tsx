@@ -8,7 +8,15 @@ import SectionHeading from '@/components/shared/SectionHeading/SectionHeading';
 import { getAllCategories } from '@/services/categories.services';
 import { CategoryType } from '@/types/categories';
 
-
+export const metadata: Metadata = {
+  title: "All Categories",
+  description: "Explore our complete curated categories for a premium shopping experience at Yassify. Browse Electronics, Fashion, Home, Beauty and more.",
+  openGraph: {
+    title: "All Categories | Yassify",
+    description: "Explore our complete curated categories for a premium shopping experience at Yassify.",
+    type: "website",
+  },
+};
 
 export default async function CategoriesPage() {
   const categoriesRes = await getAllCategories();

@@ -8,6 +8,25 @@ import SectionHeading from '@/components/shared/SectionHeading/SectionHeading';
 import { getAllSubCategoriesOnCategory, getSpecificCategory } from '@/services/categories.services';
 import { SubCategory } from '@/types/categories';
 
+interface SubCategoriesPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: SubCategoriesPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const category = await getSpecificCategory(id);
+  const name = category?.name || "Category";
+
+  return {
+    title: `${name} Subcategories`,
+    description: `Browse all subcategories within ${name} at Yassify. Find the perfect products in our curated ${name} collection.`,
+    openGraph: {
+      title: `${name} Subcategories | Yassify`,
+      description: `Browse all subcategories within ${name} at Yassify.`,
+      type: "website",
+    },
+  };
+}
 
 export default async function SubCategoriesPage({
   params,

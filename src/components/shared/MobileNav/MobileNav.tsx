@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Session } from "next-auth"; 
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
@@ -49,6 +51,16 @@ interface MobileNavProps {
 
 export default function MobileNav({ status, sessionData }: MobileNavProps) {
   const { cartCount, wishlistCount } = useCartWishlist();
+  const router = useRouter();
+  const [mobileSearch, setMobileSearch] = useState("");
+
+  const handleMobileSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = mobileSearch.trim();
+    if (!trimmed) return;
+    router.push(`/products?keyword=${encodeURIComponent(trimmed)}`);
+    setMobileSearch("");
+  };
 
   return (
     <Drawer direction="right">
@@ -87,12 +99,14 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
         <div className="flex-1 overflow-y-auto p-5 space-y-6">
           
           
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={handleMobileSearch}>
             <div className="relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
               <input
                 type="search"
                 placeholder="Search products..."
+                value={mobileSearch}
+                onChange={(e) => setMobileSearch(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 rounded-2xl border-none bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm text-base font-medium transition-shadow"
               />
             </div>

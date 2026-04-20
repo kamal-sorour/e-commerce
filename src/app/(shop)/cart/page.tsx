@@ -49,6 +49,51 @@ export default function CartPage() {
     fetchCart();
   }, []);
 
+  const handleQuantityChange = (productId: string, newQuantity: number) => {
+    if (!cartDetails?.data?.data) return;
+    const updatedProducts = cartDetails.data.data.products.map((item) =>
+      item.product._id === productId ? { ...item, count: newQuantity } : item
+    );
+    const newTotalPrice = updatedProducts.reduce(
+      (sum, item) => sum + item.price * item.count,
+      0
+    );
+    setCartDetails({
+      ...cartDetails,
+      data: {
+        ...cartDetails.data,
+        data: {
+          ...cartDetails.data.data,
+          products: updatedProducts,
+          totalCartPrice: newTotalPrice,
+        },
+      },
+    });
+  };
+
+  const handleRemoveProduct = (productId: string) => {
+    if (!cartDetails?.data?.data) return;
+    const updatedProducts = cartDetails.data.data.products.filter(
+      (item) => item.product._id !== productId
+    );
+    const newTotalPrice = updatedProducts.reduce(
+      (sum, item) => sum + item.price * item.count,
+      0
+    );
+    setCartDetails({
+      ...cartDetails,
+      data: {
+        ...cartDetails.data,
+        data: {
+          ...cartDetails.data.data,
+          products: updatedProducts,
+          totalCartPrice: newTotalPrice,
+        },
+        numOfCartItems: updatedProducts.length,
+      },
+    });
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
@@ -101,6 +146,8 @@ export default function CartPage() {
                       quantity={product.count}
                       view={view}
                       index={idx}
+                      onQuantityChange={handleQuantityChange}
+                      onRemove={handleRemoveProduct}
                     />
                   ))}
                 </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 import { ArrowRight, Award, PackageOpen } from "lucide-react";
 
 import PageBanner from "@/components/shared/PageBanner/PageBanner";
@@ -7,6 +8,16 @@ import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import { getAllBrands } from "@/services/brands.services";
 import { BrandType } from "@/types/brands";
 import defaultBrandImage from "@/assets/logo.png";
+
+export const metadata: Metadata = {
+  title: "Top Brands",
+  description: "Discover and shop from your favorite top-tier brands at Yassify. Browse our curated selection of premium brands.",
+  openGraph: {
+    title: "Top Brands | Yassify",
+    description: "Discover and shop from your favorite top-tier brands at Yassify.",
+    type: "website",
+  },
+};
 
 export default async function BrandsPage() {
   const brands: BrandType[] = (await getAllBrands()) || [];

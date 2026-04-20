@@ -1,5 +1,15 @@
+import { Metadata } from "next";
 import { ShieldCheck, Lock } from "lucide-react";
 import CheckoutForm from "@/components/forms/CheckoutForm/CheckoutForm"; 
+
+export const metadata: Metadata = {
+  title: "Secure Checkout",
+  description: "Complete your order securely at Yassify. Fast, safe, and 100% protected payment.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 interface CheckoutPageProps {
   searchParams: Promise<{

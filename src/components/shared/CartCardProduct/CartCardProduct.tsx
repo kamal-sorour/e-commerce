@@ -21,10 +21,12 @@ interface CartCardProps {
   view: ViewType;
   index: number;
   price: number;
-    quantity: number;
+  quantity: number;
+  onQuantityChange?: (productId: string, newQuantity: number) => void;
+  onRemove?: (productId: string) => void;
 }
 
-export default function CartCardProduct({ product, view, index, price, quantity }: CartCardProps) {
+export default function CartCardProduct({ product, view, index, price, quantity, onQuantityChange, onRemove }: CartCardProps) {
 
   const [isUpdating, setIsUpdating] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
@@ -36,8 +38,8 @@ export default function CartCardProduct({ product, view, index, price, quantity 
     try {
       const resp = await updateProductQuantity(id, quantity);
       if (resp.success) {
-        
-        toast.success("done updated");
+        toast.success("Quantity updated");
+        onQuantityChange?.(id, quantity);
       } else {
         toast.error(resp.message);
       }
@@ -53,6 +55,7 @@ export default function CartCardProduct({ product, view, index, price, quantity 
       if (response.success) {
         toast.success("Item removed from cart");
         decrementCartCount();
+        onRemove?.(productId);
       } else {
         toast.error(response.message);
       }

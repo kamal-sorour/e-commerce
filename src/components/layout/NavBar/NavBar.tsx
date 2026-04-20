@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import {
   Headset,
@@ -72,8 +73,18 @@ const categories = [
 
 export default function Navbar({ className }: NavbarProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const { status, data: sessionData } = useSession();
   const { cartCount, wishlistCount } = useCartWishlist();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = searchTerm.trim();
+    if (!trimmed) return;
+    router.push(`/products?keyword=${encodeURIComponent(trimmed)}`);
+    setSearchTerm("");
+  };
   
   const logOutHandler = () => {
     signOut({ callbackUrl: "/" });
@@ -104,12 +115,14 @@ export default function Navbar({ className }: NavbarProps) {
             </Link>
 
             
-            <form className="hidden lg:flex flex-1 max-w-xl mx-4">
+            <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-xl mx-4">
               <div className="relative w-full group">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
                 <Input
                   type="search"
                   placeholder="Search for premium products..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-11 pr-4 h-11 rounded-full border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 focus-visible:ring-emerald-500/20 focus-visible:border-emerald-500 transition-all shadow-inner"
                 />
               </div>

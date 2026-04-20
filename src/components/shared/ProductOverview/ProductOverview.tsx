@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { 
   Minus, Plus, Share2, ShieldCheck, 
-  Star, Truck, Zap, ShoppingCart, RotateCcw
+  Star, Truck, Zap, ShoppingCart, RotateCcw, Loader2
 } from "lucide-react";
+
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -14,14 +16,46 @@ import { Badge } from "@/components/ui/badge";
 import { ProductType } from "@/types/products";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 import AddToWishlistButton from "../AddToWishlistButton/AddToWishlistButton";
+import { addToCart, getCartItems } from "@/actions/cart.actions";
+import { CartResponse } from "@/types/cart";
+import { useCartWishlist } from "@/providers/CartWishlistProvider/CartWishlistProvider";
+import { toast } from "sonner";
 
 interface ProductOverviewProps {
   prod: ProductType;
 }
 
 export default function ProductOverview({ prod }: ProductOverviewProps) {
-  
+  const router = useRouter();
+  const { incrementCartCount } = useCartWishlist();
   const [quantity, setQuantity] = useState(1);
+  const [isBuyingNow, setIsBuyingNow] = useState(false);
+
+  const handleBuyNow = async () => {
+    setIsBuyingNow(true);
+    try {
+      const res = await addToCart(prod.id);
+      if (!res.success) {
+        toast.error(res.message || "Failed to add product to cart");
+        return;
+      }
+      incrementCartCount();
+      const cartRes = await getCartItems();
+      if (cartRes && 'data' in cartRes) {
+        const cartData = cartRes as CartResponse;
+        const cartId = cartData.data?.cartId;
+        if (cartId) {
+          router.push(`/checkout?id=${cartId}`);
+          return;
+        }
+      }
+      router.push('/cart');
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsBuyingNow(false);
+    }
+  };
   const currentPrice = prod.priceAfterDiscount || prod.price;
   const totalPrice = currentPrice * quantity;
 
@@ -88,13 +122,13 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
           </label>
           <div className="flex items-center gap-4">
             <div className="flex items-center bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 p-1">
-              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("dec")} disabled className="h-10 w-10 rounded-lg">
+              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("dec")} disabled={quantity <= 1} className="h-10 w-10 rounded-lg">
                 <Minus size={16} />
               </Button>
               <div className="w-12 text-center font-bold text-lg text-slate-900 dark:text-slate-100">
                 {quantity}
               </div>
-              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("inc")} disabled className="h-10 w-10 rounded-lg">
+              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("inc")} disabled={quantity >= prod.quantity} className="h-10 w-10 rounded-lg">
                 <Plus size={16} />
               </Button>
             </div>
@@ -119,8 +153,17 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
            isFromProductDetails
            productId={prod.id}
 />
-        <Button className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-transform active:scale-[0.98]">
-          <Zap size={20} className="fill-white" /> Buy Now
+        <Button 
+          onClick={handleBuyNow}
+          disabled={isBuyingNow}
+          className="w-full h-14 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-transform active:scale-[0.98] disabled:opacity-80 disabled:cursor-not-allowed"
+        >
+          {isBuyingNow ? (
+            <Loader2 size={20} className="animate-spin" />
+          ) : (
+            <Zap size={20} className="fill-white" />
+          )}
+          {isBuyingNow ? "Processing..." : "Buy Now"}
         </Button>
       </div>
 

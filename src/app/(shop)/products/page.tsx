@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { PackageOpen, Shapes } from 'lucide-react';
+import { PackageOpen, Shapes, Search } from 'lucide-react';
 
 import PageBanner from '@/components/shared/PageBanner/PageBanner';
 import SectionHeading from '@/components/shared//SectionHeading/SectionHeading';
 import ProductCard from '@/components/shared/ProductCard/ProductCard';
+import ProductFilters from '@/components/shared/ProductFilters/ProductFilters';
 
 import { getProducts } from "@/services/products.services";
 import { ProductQueryParams } from '@/types/products';
@@ -13,22 +14,66 @@ import { ProductQueryParams } from '@/types/products';
 import defaultBrandImage from '@/assets/logo.png';
 import CatalogPagination from '@/components/shared/CatalogPagination/CatalogPagination';
 
-
-export default async function ShopCatalogPage({
-  searchParams,
-}: {
+interface ShopCatalogPageProps {
   searchParams: Promise<{
-    page: number;
-    brand: string;
-    subcategory: string;
-    category: string;
+    page?: number;
+    brand?: string;
+    subcategory?: string;
+    category?: string;
+    keyword?: string;
+    sort?: string;
+    "price[gte]"?: string;
+    "price[lte]"?: string;
   }>;
-}) {
-  const { page = 1, brand, subcategory, category } = await searchParams;
+}
+
+export async function generateMetadata({ searchParams }: ShopCatalogPageProps): Promise<Metadata> {
+  const params = await searchParams;
+
+  let title = "Shop All Products";
+  let description = "Explore our premium collection of meticulously curated products at Yassify.";
+
+  if (params.keyword) {
+    title = `Search: "${params.keyword}"`;
+    description = `Search results for "${params.keyword}" — Discover matching products at Yassify.`;
+  } else if (params.brand) {
+    title = "Brand Products";
+    description = "Explore products from your favorite brand at Yassify.";
+  } else if (params.category || params.subcategory) {
+    title = "Category Products";
+    description = "Browse category products at Yassify.";
+  }
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: `${title} | Yassify`,
+      description,
+      type: "website",
+    },
+  };
+}
+
+export default async function ShopCatalogPage({ searchParams }: ShopCatalogPageProps) {
+  const {
+    page = 1,
+    brand,
+    subcategory,
+    category,
+    keyword,
+    sort,
+    "price[gte]": priceGte,
+    "price[lte]": priceLte,
+  } = await searchParams;
 
   
   const queryParams: ProductQueryParams = { page };
   if (brand) queryParams.brand = brand;
+  if (keyword) queryParams.keyword = keyword;
+  if (sort) queryParams.sort = sort;
+  if (priceGte) queryParams['price[gte]'] = Number(priceGte);
+  if (priceLte) queryParams['price[lte]'] = Number(priceLte);
   
   if (subcategory) queryParams['category[in]'] = subcategory;
   else if (category) queryParams['category[in]'] = category;
@@ -40,13 +85,17 @@ export default async function ShopCatalogPage({
 
 
   
-  const bannerTitle = brand 
-    ? `${products[0]?.brand?.name || 'Unknown'} Products`
+  const bannerTitle = keyword
+    ? `Search: "${keyword}"`
+    : brand 
+      ? `${products[0]?.brand?.name || 'Unknown'} Products`
       : category 
         ? `${products[0]?.category?.name || 'Unknown'} Products`
         : 'All Products';
 
-  const bannerIcon = brand ? (
+  const bannerIcon = keyword ? (
+    <Search size={32} />
+  ) : brand ? (
     <Image
       src={products[0]?.brand?.image || defaultBrandImage}
       alt={products[0]?.brand?.name || 'Brand Image'}
@@ -70,6 +119,9 @@ export default async function ShopCatalogPage({
       />
 
       <div className="container mx-auto px-4 py-12 flex flex-col gap-8">
+
+        {/* Filters & Sorting Toolbar */}
+        <ProductFilters />
         
         {products.length > 0 ? (
           <div className="flex flex-col gap-6 w-full">
