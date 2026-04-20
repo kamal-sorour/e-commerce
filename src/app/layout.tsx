@@ -84,6 +84,9 @@ export default function RootLayout({
       lang="en"
       className={`${exo.variable} h-full antialiased`}
     >
+      <head>
+        <meta name="google-site-verification" content="In0nvx8JqWOvXJ_PBgoCxi1Kcg8gUfVlgM2Q41RobAs" />
+      </head>
       <body className="antialiased font-exo">
         <Providers>
           <Navbar />
