@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useOptimistic, useTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Minus, Plus, Trash2, Check, Loader2 } from "lucide-react";
@@ -28,49 +28,56 @@ interface CartCardProps {
 
 export default function CartCardProduct({ product, view, index, price, quantity, onQuantityChange, onRemove }: CartCardProps) {
 
-  const [isUpdating, setIsUpdating] = useState(false);
   const [isRemoving, setIsRemoving] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const [optimisticQty, setOptimisticQty] = useOptimistic(quantity);
   const { decrementCartCount } = useCartWishlist();
 
-  async function updateQuantity(id: string, quantity: number) {
-    if (quantity < 1) return;
-    setIsUpdating(true);
-    try {
-      const resp = await updateProductQuantity(id, quantity);
-      if (resp.success) {
-        toast.success("Quantity updated");
-        onQuantityChange?.(id, quantity);
-      } else {
-        toast.error(resp.message);
+  function updateQuantity(id: string, newQty: number) {
+    if (newQty < 1) return;
+    const prevQty = optimisticQty;
+
+    startTransition(async () => {
+      setOptimisticQty(newQty);
+      
+      try {
+        const resp = await updateProductQuantity(id, newQty);
+        if (resp.success) {
+          toast.success("Quantity updated");
+          onQuantityChange?.(id, newQty);
+        } else {
+          setOptimisticQty(prevQty);
+          toast.error(resp.message);
+        }
+      } catch {
+        setOptimisticQty(prevQty);
+        toast.error("Failed to update quantity");
       }
-    } finally {
-      setIsUpdating(false);
-    }
+    });
   }
 
   async function removeProductFromCart(productId: string) {
     setIsRemoving(true);
+    decrementCartCount();
+    
     try {
       const response = await removeCartProduct(productId);
       if (response.success) {
         toast.success("Item removed from cart");
-        decrementCartCount();
         onRemove?.(productId);
       } else {
         toast.error(response.message);
       }
+    } catch {
+      toast.error("Failed to remove item");
     } finally {
-      
       setIsRemoving(false); 
     }
   }
 
-  
-  
-  
   if (view === "list") {
     return (
-      <Card className={cn("bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all", isRemoving && "opacity-50 pointer-events-none")}>
+      <Card className={cn("bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all", isRemoving && "opacity-50 scale-95 pointer-events-none transition-all duration-300")}>
         <CardContent className="p-4 sm:p-5">
           <div className="flex gap-4 sm:gap-6">
             
@@ -114,13 +121,13 @@ export default function CartCardProduct({ product, view, index, price, quantity,
               <div className="flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 dark:border-slate-800 pt-4">
                 
                 <div className="flex items-center bg-slate-50 dark:bg-slate-800 rounded-xl p-1 border border-slate-200 dark:border-slate-700">
-                  <Button onClick={() => updateQuantity(product._id, quantity - 1)} disabled={isUpdating || quantity <= 1} size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-slate-600 dark:text-slate-300">
+                  <Button onClick={() => updateQuantity(product._id, optimisticQty - 1)} disabled={isPending || optimisticQty <= 1} size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-slate-600 dark:text-slate-300">
                     <Minus size={14} />
                   </Button>
                   <div className="w-10 text-center font-bold text-slate-900 dark:text-white text-sm">
-                    {isUpdating ? <Loader2 size={14} className="animate-spin mx-auto text-emerald-500" /> : quantity}
+                    {isPending ? <Loader2 size={14} className="animate-spin mx-auto text-emerald-500" /> : optimisticQty}
                   </div>
-                  <Button onClick={() => updateQuantity(product._id, quantity + 1)} disabled={isUpdating} size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-slate-600 dark:text-slate-300">
+                  <Button onClick={() => updateQuantity(product._id, optimisticQty + 1)} disabled={isPending} size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-slate-600 dark:text-slate-300">
                     <Plus size={14} />
                   </Button>
                 </div>
@@ -129,7 +136,7 @@ export default function CartCardProduct({ product, view, index, price, quantity,
                   <div className="text-right hidden sm:block">
                     <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total</p>
                     <p className="text-lg font-black text-emerald-600 dark:text-emerald-400">
-                      {price * quantity} <span className="text-xs">EGP</span>
+                      {price * optimisticQty} <span className="text-xs">EGP</span>
                     </p>
                   </div>
                   <Button onClick={() => removeProductFromCart(product._id)} disabled={isRemoving} variant="ghost" size="icon" className="h-10 w-10 rounded-xl bg-red-50 dark:bg-red-950/30 text-red-500 hover:bg-red-500 hover:text-white transition-all">
@@ -150,7 +157,7 @@ export default function CartCardProduct({ product, view, index, price, quantity,
   return (
     <Card className={cn(
       "bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col", 
-      isRemoving && "opacity-50 pointer-events-none",
+      isRemoving && "opacity-50 scale-95 pointer-events-none transition-all duration-300",
       isBentoLarge ? "md:col-span-2 md:flex-row" : "" 
     )}>
       <CardContent className={cn("p-4 sm:p-5 flex flex-1 gap-4", isBentoLarge ? "flex-col md:flex-row items-center" : "flex-col")}>
@@ -182,20 +189,20 @@ export default function CartCardProduct({ product, view, index, price, quantity,
           
           <div className="mt-auto border-t border-slate-100 dark:border-slate-800 pt-4 flex flex-col gap-3">
              <div className="flex items-center justify-between w-full">
-                <span className="text-xs font-bold text-slate-400">Total: <span className="text-emerald-600 dark:text-emerald-400 text-sm">{price * quantity} EGP</span></span>
+                <span className="text-xs font-bold text-slate-400">Total: <span className="text-emerald-600 dark:text-emerald-400 text-sm">{price * optimisticQty} EGP</span></span>
                 <Button onClick={() => removeProductFromCart(product._id)} disabled={isRemoving} variant="ghost" size="icon" className="h-8 w-8 rounded-lg text-slate-400 hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-red-500 transition-all">
                   {isRemoving ? <Loader2 size={14} className="animate-spin text-red-500" /> : <Trash2 size={16} />}
                 </Button>
              </div>
              
              <div className="flex items-center bg-slate-50 dark:bg-slate-800 rounded-xl p-1 border border-slate-200 dark:border-slate-700 w-full justify-between">
-                <Button onClick={() => updateQuantity(product._id, quantity - 1)} disabled={isUpdating || quantity <= 1} size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-slate-600 dark:text-slate-300">
+                <Button onClick={() => updateQuantity(product._id, optimisticQty - 1)} disabled={isPending || optimisticQty <= 1} size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-slate-600 dark:text-slate-300">
                   <Minus size={14} />
                 </Button>
                 <div className="w-10 text-center font-bold text-slate-900 dark:text-white text-sm">
-                  {isUpdating ? <Loader2 size={14} className="animate-spin mx-auto text-emerald-500" /> : quantity}
+                  {isPending ? <Loader2 size={14} className="animate-spin mx-auto text-emerald-500" /> : optimisticQty}
                 </div>
-                <Button onClick={() => updateQuantity(product._id, quantity + 1)} disabled={isUpdating} size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-slate-600 dark:text-slate-300">
+                <Button onClick={() => updateQuantity(product._id, optimisticQty + 1)} disabled={isPending} size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-slate-600 dark:text-slate-300">
                   <Plus size={14} />
                 </Button>
               </div>

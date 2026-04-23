@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Plus, ShoppingCart, Loader2 } from "lucide-react";
+import { useState, useOptimistic, useTransition } from "react";
+import { Plus, ShoppingCart, Loader2, Check } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -16,51 +16,69 @@ interface AddToCartButtonProps {
   isFromProductDetails?: boolean; 
 }
 
+type OptimisticState = "idle" | "adding" | "added";
+
 export default function AddToCartButton({ 
   productId, 
   quantity = 1, 
   isFromProductDetails = false 
 }: AddToCartButtonProps) {
   
+  const [isPending, startTransition] = useTransition();
+  const { incrementCartCount, decrementCartCount } = useCartWishlist();
+  const [optimisticState, setOptimisticState] = useOptimistic<OptimisticState>("idle");
 
-  const [isLoading, setIsLoading] = useState(false);
-  const { incrementCartCount } = useCartWishlist();
+  function addProductToCart() {
+    startTransition(async () => {
+      setOptimisticState("adding");
+      incrementCartCount();
 
-  async function addProductToCart() {
-    setIsLoading(true);
-    try {
-      
-      const res = await addToCart(productId); 
-      
-      if (res.success) {
-        toast.success(res.message || "Added to cart successfully!");
-        incrementCartCount();
-      } else {
-        toast.error(res.message || "Failed to add product to cart");
+      try {
+        const res = await addToCart(productId);
+        
+        if (res.success) {
+          setOptimisticState("added");
+          toast.success(res.message || "Added to cart successfully!");
+          setTimeout(() => {
+            startTransition(() => setOptimisticState("idle"));
+          }, 1500);
+        } else {
+          decrementCartCount();
+          setOptimisticState("idle");
+          toast.error(res.message || "Failed to add product to cart");
+        }
+      } catch {
+        decrementCartCount();
+        setOptimisticState("idle");
+        toast.error("Something went wrong. Please try again.");
       }
-    } catch (error) {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
+    });
   }
+
+  const isAdding = optimisticState === "adding";
+  const isAdded = optimisticState === "added";
 
   if (isFromProductDetails) {
     return (
       <Button
         onClick={addProductToCart}
-        disabled={isLoading}
+        disabled={isPending}
         className={cn(
-          "w-full h-14 bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-transform active:scale-[0.98]",
-          isLoading && "opacity-80 cursor-not-allowed"
+          "w-full h-14 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98]",
+          isAdded
+            ? "bg-emerald-500 hover:bg-emerald-600 text-white"
+            : "bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-200",
+          isPending && "opacity-80 cursor-not-allowed"
         )}
       >
-        {isLoading ? (
+        {isAdding ? (
           <Loader2 size={20} className="animate-spin" />
+        ) : isAdded ? (
+          <Check size={20} strokeWidth={3} />
         ) : (
           <ShoppingCart size={20} />
         )}
-        <span>{isLoading ? "Adding..." : "Add to Cart"}</span>
+        <span>{isAdding ? "Adding..." : isAdded ? "Added!" : "Add to Cart"}</span>
       </Button>
     );
   }
@@ -68,16 +86,21 @@ export default function AddToCartButton({
   return (
     <Button
       onClick={addProductToCart}
-      disabled={isLoading}
+      disabled={isPending}
       size="icon"
       className={cn(
-        "h-10 w-10 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20 transition-all active:scale-95",
-        isLoading && "bg-emerald-500 cursor-not-allowed"
+        "h-10 w-10 rounded-xl shadow-md transition-all active:scale-95",
+        isAdded
+          ? "bg-emerald-500 hover:bg-emerald-600 text-white shadow-emerald-500/20"
+          : "bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20",
+        isPending && "bg-emerald-500 cursor-not-allowed"
       )}
       title="Add to cart"
     >
-      {isLoading ? (
+      {isAdding ? (
         <Loader2 size={18} className="animate-spin" />
+      ) : isAdded ? (
+        <Check size={18} strokeWidth={3} />
       ) : (
         <Plus size={20} strokeWidth={2.5} />
       )}

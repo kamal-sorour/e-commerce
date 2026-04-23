@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import type { JWT } from "next-auth/jwt";
 
 const ROUTES = {
-  protected: ["/cart", "/wishlist", "/checkout", "/profile", "/allorders"],
+  protected: ["/cart", "/wishlist", "/checkout", "/profile", "/allorders", "/settings"],
   auth: ["/signin", "/signup"],
 };
 
@@ -41,5 +41,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/cart", "/wishlist", "/checkout", "/allorders", "/signin", "/signup"],
+  matcher: ["/cart", "/wishlist", "/checkout", "/allorders", "/profile", "/settings", "/signin", "/signup"],
 };

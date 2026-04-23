@@ -28,20 +28,23 @@ interface WishlistCardProps {
 export default function WishlistProductCard({ product, view, index, onRemove }: WishlistCardProps) {
 
   const [isRemoving, setIsRemoving] = useState(false);
-  const { decrementWishlistCount } = useCartWishlist();
+  const { decrementWishlistCount, incrementWishlistCount } = useCartWishlist();
 
   async function removeProductFromWishlist() {
     setIsRemoving(true);
+    decrementWishlistCount();
+    onRemove(product._id);
+
     try {
       const res = await removeFromWishlist(product._id);
-      if (res.success) {
-        toast.success("Removed from wishlist");
-        decrementWishlistCount();
-        onRemove(product._id); 
-      } else {
+      if (!res.success) {
+        incrementWishlistCount();
         toast.error(res.message || "Failed to remove item");
+      } else {
+        toast.success("Removed from wishlist");
       }
-    } catch (error) {
+    } catch {
+      incrementWishlistCount();
       toast.error("Something went wrong");
     } finally {
       setIsRemoving(false);
@@ -50,12 +53,9 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
 
   const isOutOfStock = product.quantity === 0;
 
-  
-  
-  
   if (view === "list") {
     return (
-      <Card className={cn("bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden group", isRemoving && "opacity-50 pointer-events-none")}>
+      <Card className={cn("bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden group", isRemoving && "opacity-50 scale-95 pointer-events-none")}>
         <div className="absolute inset-0 bg-linear-to-r from-red-50/50 to-transparent dark:from-red-950/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
         
         <CardContent className="p-4 sm:p-6 flex flex-col sm:flex-row gap-6 relative z-10">
@@ -135,7 +135,7 @@ export default function WishlistProductCard({ product, view, index, onRemove }: 
   return (
     <Card className={cn(
       "bg-white dark:bg-slate-900 rounded-3xl border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl dark:shadow-none hover:border-red-200 dark:hover:border-red-900/50 transition-all duration-500 flex flex-col relative overflow-hidden group", 
-      isRemoving && "opacity-50 pointer-events-none",
+      isRemoving && "opacity-50 scale-95 pointer-events-none",
       isBentoLarge ? "md:col-span-2 md:flex-row" : "" 
     )}>
       

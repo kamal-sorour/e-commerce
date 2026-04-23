@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import YassifyBanner from "@/components/shared/YassifyBanner/YassifyBanner";
-import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
 const footerLinks = {
   shop: [
@@ -64,14 +64,11 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const [theme, setTheme] = useState<string | null>(null);
+  const { resolvedTheme } = useTheme();
 
-  useEffect(() => {
-    setTheme(localStorage.getItem("theme"));
-  }, []);
   return (
     <TooltipProvider>
-      <YassifyBanner variant={theme === "dark" ? "multicolor" : "emerald"} />
+      <YassifyBanner variant={resolvedTheme === "dark" ? "multicolor" : "emerald"} />
       <footer className="w-full bg-slate-50 dark:bg-slate-950 border-t border-border transition-colors duration-300">
         <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
