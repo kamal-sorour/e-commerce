@@ -60,7 +60,7 @@ export default function CheckoutForm({ cartId }: CheckoutFormProps) {
         if (data.paymentMethod === "cash") {
           toast.success(resp.message || "Order placed successfully!");
         
-          router.push("/orders");
+          router.push("/allorders");
         } else {
           
           window.open(resp.session?.url, "_self");
