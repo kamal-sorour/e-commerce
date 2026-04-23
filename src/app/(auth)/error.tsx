@@ -21,7 +21,7 @@ export default function AuthError({
         <div className="relative mx-auto mb-8">
           <div className="absolute inset-0 w-32 h-32 mx-auto bg-violet-100/50 dark:bg-violet-900/20 rounded-[2rem] blur-2xl" />
           <div className="relative w-28 h-28 mx-auto rounded-[2rem] bg-white dark:bg-slate-900 border border-violet-100 dark:border-violet-900/30 shadow-xl shadow-violet-100/50 dark:shadow-none flex items-center justify-center overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-50/80 dark:from-violet-900/10 via-transparent to-violet-100/40 dark:to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-br from-violet-50/80 dark:from-violet-900/10 via-transparent to-violet-100/40 dark:to-transparent" />
             <KeyRound size={40} className="text-violet-500 dark:text-violet-400 relative z-10" strokeWidth={1.5} />
             <div className="absolute -bottom-1 -right-1">
               <AlertTriangle size={20} className="text-red-500" />

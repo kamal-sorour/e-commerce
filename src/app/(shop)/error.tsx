@@ -21,7 +21,7 @@ export default function ShopError({
         <div className="relative mx-auto mb-8">
           <div className="absolute inset-0 w-32 h-32 mx-auto bg-amber-100/50 dark:bg-amber-900/20 rounded-[2rem] blur-2xl" />
           <div className="relative w-28 h-28 mx-auto rounded-[2rem] bg-white dark:bg-slate-900 border border-amber-100 dark:border-amber-900/30 shadow-xl shadow-amber-100/50 dark:shadow-none flex items-center justify-center overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 dark:from-amber-900/10 via-transparent to-amber-100/40 dark:to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-br from-amber-50/80 dark:from-amber-900/10 via-transparent to-amber-100/40 dark:to-transparent" />
             <ShoppingBag size={40} className="text-amber-500 dark:text-amber-400 relative z-10" strokeWidth={1.5} />
             <div className="absolute -bottom-1 -right-1">
               <AlertTriangle size={20} className="text-red-500" />
