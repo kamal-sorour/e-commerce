@@ -59,7 +59,8 @@ export default function ProductCard({ product }: Props) {
           alt={title}
           width={500}
           height={500}
-          loading="eager"
+          loading="lazy"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 20vw"
         />
 
         {discount > 0 && (

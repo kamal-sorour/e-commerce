@@ -10,6 +10,8 @@ const exo = Exo({
   variable: "--font-exo-custom",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"], 
+  display: "swap",
+  preload: true,
 });
 
 const siteUrl = process.env.NEXTAUTH_URL || "https://yassify.netlify.app";
