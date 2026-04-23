@@ -10,48 +10,40 @@ interface ViewToggleProps {
   onViewChange: (view: ViewType) => void;
 }
 
+const viewOptions: { value: ViewType; label: string; icon: typeof List }[] = [
+  { value: "list", label: "List View", icon: List },
+  { value: "grid", label: "Grid View", icon: LayoutGrid },
+  { value: "bento", label: "Bento View", icon: LayoutDashboard },
+];
+
 export default function ViewToggle({ view, onViewChange }: ViewToggleProps) {
   return (
-    <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => onViewChange("list")}
-        className={`w-9 h-9 rounded-lg transition-all ${
-          view === "list"
-            ? "bg-white dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 shadow-sm"
-            : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800/50"
-        }`}
-        title="List View"
-      >
-        <List size={18} />
-      </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => onViewChange("grid")}
-        className={`w-9 h-9 rounded-lg transition-all ${
-          view === "grid"
-            ? "bg-white dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 shadow-sm"
-            : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800/50"
-        }`}
-        title="Grid View"
-      >
-        <LayoutGrid size={18} />
-      </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => onViewChange("bento")}
-        className={`w-9 h-9 rounded-lg transition-all ${
-          view === "bento"
-            ? "bg-white dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 shadow-sm"
-            : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800/50"
-        }`}
-        title="Bento View"
-      >
-        <LayoutDashboard size={18} />
-      </Button>
+    <div
+      className="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl border border-slate-200 dark:border-slate-800"
+      role="group"
+      aria-label="Product view layout"
+    >
+      {viewOptions.map((opt) => {
+        const Icon = opt.icon;
+        const isActive = view === opt.value;
+        return (
+          <Button
+            key={opt.value}
+            variant="ghost"
+            size="icon"
+            onClick={() => onViewChange(opt.value)}
+            aria-label={opt.label}
+            aria-pressed={isActive}
+            className={`w-9 h-9 rounded-lg transition-all ${
+              isActive
+                ? "bg-white dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 shadow-sm"
+                : "text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800/50"
+            }`}
+          >
+            <Icon size={18} aria-hidden="true" />
+          </Button>
+        );
+      })}
     </div>
   );
 }

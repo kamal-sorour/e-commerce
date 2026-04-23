@@ -67,10 +67,13 @@ export default function NewsletterPromo() {
                 <form className="pt-2 max-w-xl">
                   <div className="flex flex-col sm:flex-row gap-3">
                     <div className="relative flex-1">
+                      <label htmlFor="newsletter-email" className="sr-only">Email address</label>
                       <Input
+                        id="newsletter-email"
                         placeholder="you@example.com"
                         type="email"
                         required
+                        aria-label="Email address for newsletter"
                         className="w-full h-14 pl-6 pr-4 bg-white dark:bg-slate-950 border-2 border-slate-200 dark:border-slate-800 rounded-2xl text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus-visible:ring-emerald-500/20 focus-visible:border-emerald-500 text-base shadow-sm transition-all"
                       />
                     </div>

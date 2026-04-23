@@ -74,13 +74,16 @@ export default function LoginForm() {
     <form className="space-y-5" onSubmit={handleSubmit(onSubmit)} noValidate>
       
       <div className="space-y-1.5">
-        <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
+        <label htmlFor="login-email" className="text-sm font-bold text-slate-700 dark:text-slate-300">
           Email Address
         </label>
         <div className="relative">
           <Input
+            id="login-email"
             type="email"
             placeholder="name@example.com"
+            aria-describedby={errors.email ? "login-email-error" : undefined}
+            aria-invalid={!!errors.email}
             className={`h-12 rounded-xl pl-11 bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 focus-visible:ring-emerald-500/20 focus-visible:border-emerald-500 ${errors.email ? "border-red-500 focus-visible:border-red-500" : ""}`}
             {...register("email", {
               required: "Email is required",
@@ -93,10 +96,11 @@ export default function LoginForm() {
           <Mail
             size={18}
             className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+            aria-hidden="true"
           />
         </div>
         {errors.email && (
-          <p className="text-xs font-semibold text-red-500 px-1">
+          <p id="login-email-error" className="text-xs font-semibold text-red-500 px-1" role="alert">
             {errors.email.message}
           </p>
         )}
@@ -104,13 +108,16 @@ export default function LoginForm() {
 
       
       <div className="space-y-1.5">
-        <label className="text-sm font-bold text-slate-700 dark:text-slate-300">
+        <label htmlFor="login-password" className="text-sm font-bold text-slate-700 dark:text-slate-300">
           Password
         </label>
         <div className="relative">
           <Input
+            id="login-password"
             type={showPassword ? "text" : "password"}
             placeholder="Enter your password"
+            aria-describedby={errors.password ? "login-password-error" : undefined}
+            aria-invalid={!!errors.password}
             className={`h-12 rounded-xl bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-800 focus-visible:ring-emerald-500/20 focus-visible:border-emerald-500 pr-12 ${errors.password ? "border-red-500 focus-visible:border-red-500" : ""}`}
             {...register("password", {
               required: "Password is required",
@@ -120,12 +127,13 @@ export default function LoginForm() {
             type="button"
             onClick={() => setShowPassword(!showPassword)}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors p-1"
+            aria-label={showPassword ? "Hide password" : "Show password"}
           >
-            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+            {showPassword ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
           </button>
         </div>
         {errors.password && (
-          <p className="text-xs font-semibold text-red-500 px-1">
+          <p id="login-password-error" className="text-xs font-semibold text-red-500 px-1" role="alert">
             {errors.password.message}
           </p>
         )}

@@ -51,7 +51,7 @@ export default function ProductCard({ product }: Props) {
   };
 
   return (
-    <div className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl dark:shadow-none transition-all duration-500 ease-out flex flex-col justify-between h-full relative">
+    <article aria-label={`Product: ${title}`} className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl dark:shadow-none transition-all duration-500 ease-out flex flex-col justify-between h-full relative">
       <div className="relative overflow-hidden bg-slate-50 dark:bg-slate-800/50 p-4 aspect-square flex items-center justify-center">
         <Image
           className="w-full h-full object-contain transition-transform duration-700 ease-out group-hover:scale-110 drop-shadow-sm"
@@ -81,8 +81,9 @@ export default function ProductCard({ product }: Props) {
             variant="secondary"
             className="h-9 w-9 rounded-full bg-white dark:bg-slate-950 shadow-md hover:bg-emerald-50 dark:hover:bg-emerald-950 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
             title="Compare"
+            aria-label="Compare product"
           >
-            <ArrowLeftRight size={16} strokeWidth={2.5} />
+            <ArrowLeftRight size={16} strokeWidth={2.5} aria-hidden="true" />
           </Button>
 
           <Button
@@ -91,9 +92,10 @@ export default function ProductCard({ product }: Props) {
             variant="secondary"
             className="h-9 w-9 rounded-full bg-white dark:bg-slate-950 shadow-md hover:bg-emerald-50 dark:hover:bg-emerald-950 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
             title="Quick View"
+            aria-label={`View details of ${title}`}
           >
             <Link href={link}>
-              <Eye size={16} strokeWidth={2.5} />
+              <Eye size={16} strokeWidth={2.5} aria-hidden="true" />
             </Link>
           </Button>
         </div>
@@ -115,7 +117,7 @@ export default function ProductCard({ product }: Props) {
         </h3>
 
         <div className="flex items-center mb-4 gap-2 mt-auto">
-          <div className="flex gap-0.5">{renderStars()}</div>
+          <div className="flex gap-0.5" role="img" aria-label={`Rating: ${ratingsAverage.toFixed(1)} out of 5 stars`}>{renderStars()}</div>
           <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
             {ratingsAverage.toFixed(1)} ({ratingsQuantity})
           </span>
@@ -144,6 +146,6 @@ export default function ProductCard({ product }: Props) {
           </div> 
         </div>
       </div>
-    </div>
+    </article>
   );
 }

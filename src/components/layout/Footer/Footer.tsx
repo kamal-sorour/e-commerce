@@ -69,7 +69,7 @@ export default function Footer() {
   return (
     <TooltipProvider>
       <YassifyBanner variant={resolvedTheme === "dark" ? "multicolor" : "emerald"} />
-      <footer className="w-full bg-slate-50 dark:bg-slate-950 border-t border-border transition-colors duration-300">
+      <footer className="w-full bg-slate-50 dark:bg-slate-950 border-t border-border transition-colors duration-300" role="contentinfo" aria-label="Site footer">
         <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4 space-y-6">
@@ -110,8 +110,8 @@ export default function Footer() {
                           social.color,
                         )}
                       >
-                        <Link href={social.href}>
-                          <social.icon size={18} />
+                        <Link href={social.href} aria-label={`Follow us on ${social.label}`}>
+                          <social.icon size={18} aria-hidden="true" />
                         </Link>
                       </Button>
                     </TooltipTrigger>
@@ -123,7 +123,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="lg:col-span-2">
+            <nav className="lg:col-span-2" aria-label="Shop links">
               <h3 className="font-bold text-foreground mb-6">Shop</h3>
               <ul className="space-y-3">
                 {footerLinks.shop.map((link) => (
@@ -137,9 +137,9 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
-            <div className="lg:col-span-2">
+            <nav className="lg:col-span-2" aria-label="Account links">
               <h3 className="font-bold text-foreground mb-6">My Account</h3>
               <ul className="space-y-3">
                 {footerLinks.account.map((link) => (
@@ -153,9 +153,9 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
-            <div className="lg:col-span-2">
+            <nav className="lg:col-span-2" aria-label="Support links">
               <h3 className="font-bold text-foreground mb-6">Support</h3>
               <ul className="space-y-3">
                 {footerLinks.support.map((link) => (
@@ -169,9 +169,9 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
 
-            <div className="lg:col-span-2">
+            <nav className="lg:col-span-2" aria-label="Legal links">
               <h3 className="font-bold text-foreground mb-6">Legal</h3>
               <ul className="space-y-3">
                 {footerLinks.legal.map((link) => (
@@ -185,7 +185,7 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           </div>
         </div>
 

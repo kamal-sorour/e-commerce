@@ -69,8 +69,9 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
           variant="ghost" 
           size="icon"
           className="lg:hidden ml-2 w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-emerald-50 hover:text-emerald-600 transition-all active:scale-95"
+          aria-label="Open menu"
         >
-          <Menu size={20} strokeWidth={2.5} />
+          <Menu size={20} strokeWidth={2.5} aria-hidden="true" />
         </Button>
       </DrawerTrigger>
 
@@ -88,8 +89,8 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
               src={logoImage.src}
             />
             <DrawerClose asChild>
-              <Button variant="ghost" size="icon" className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors">
-                <X size={18} strokeWidth={2.5} />
+              <Button variant="ghost" size="icon" className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 transition-colors" aria-label="Close menu">
+                <X size={18} strokeWidth={2.5} aria-hidden="true" />
               </Button>
             </DrawerClose>
           </div>
@@ -99,10 +100,12 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
         <div className="flex-1 overflow-y-auto p-5 space-y-6">
           
           
-          <form onSubmit={handleMobileSearch}>
+          <form onSubmit={handleMobileSearch} role="search" aria-label="Search products">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" aria-hidden="true" />
+              <label htmlFor="mobile-search" className="sr-only">Search products</label>
               <input
+                id="mobile-search"
                 type="search"
                 placeholder="Search products..."
                 value={mobileSearch}
@@ -212,8 +215,9 @@ export default function MobileNav({ status, sessionData }: MobileNavProps) {
                 size="icon"
                 onClick={() => signOut({ callbackUrl: "/" })}
                 className="w-10 h-10 rounded-full bg-red-50 dark:bg-red-950/30 text-red-600 hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors"
+                aria-label="Sign out"
               >
-                <LogOut size={18} />
+                <LogOut size={18} aria-hidden="true" />
               </Button>
             </div>
           )}

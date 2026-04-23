@@ -97,7 +97,7 @@ export default function HeroSlider() {
 
   return (
     <>
-      <div className="relative w-full h-125 lg:h-150 group overflow-hidden shadow-sm">
+      <section aria-label="Featured promotions" className="relative w-full h-125 lg:h-150 group overflow-hidden shadow-sm" aria-roledescription="carousel">
         <Swiper
           modules={[Navigation, Pagination, Keyboard, Autoplay, EffectFade]}
           effect="fade"
@@ -181,8 +181,9 @@ export default function HeroSlider() {
             variant="outline"
             size="icon"
             className="pointer-events-auto h-12 w-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-transparent hover:border-emerald-500 hover:bg-white dark:hover:bg-slate-900 hover:text-emerald-600 text-slate-700 dark:text-slate-300 shadow-xl"
+            aria-label="Previous slide"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={24} aria-hidden="true" />
           </Button>
 
           <Button
@@ -190,8 +191,9 @@ export default function HeroSlider() {
             variant="outline"
             size="icon"
             className="pointer-events-auto h-12 w-12 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-transparent hover:border-emerald-500 hover:bg-white dark:hover:bg-slate-900 hover:text-emerald-600 text-slate-700 dark:text-slate-300 shadow-xl"
+            aria-label="Next slide"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={24} aria-hidden="true" />
           </Button>
         </div>
 
@@ -211,7 +213,7 @@ export default function HeroSlider() {
             background-color: #cbd5e1;
           }
         `}</style>
-      </div>
+      </section>
 
       <YassifyBanner variant={theme === "dark" ? "emerald" : "multicolor" } />
     </>

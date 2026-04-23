@@ -98,9 +98,10 @@ export default function Navbar({ className }: NavbarProps) {
           "sticky top-0 z-40 w-full border-b bg-white/90 dark:bg-slate-950/90 backdrop-blur-md shadow-sm transition-colors duration-500",
           className,
         )}
+        role="banner"
       >
         <div className="container mx-auto px-4">
-          <nav className="flex items-center justify-between h-16 lg:h-20 gap-4">
+          <nav aria-label="Main navigation" className="flex items-center justify-between h-16 lg:h-20 gap-4">
             
             
             <Link className="shrink-0 transition-transform hover:scale-105 active:scale-95" href="/">
@@ -115,10 +116,12 @@ export default function Navbar({ className }: NavbarProps) {
             </Link>
 
             
-            <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-xl mx-4">
+            <form onSubmit={handleSearch} className="hidden lg:flex flex-1 max-w-xl mx-4" role="search" aria-label="Search products">
               <div className="relative w-full group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" aria-hidden="true" />
+                <label htmlFor="desktop-search" className="sr-only">Search products</label>
                 <Input
+                  id="desktop-search"
                   type="search"
                   placeholder="Search for premium products..."
                   value={searchTerm}
@@ -209,19 +212,19 @@ export default function Navbar({ className }: NavbarProps) {
 
               
               <div className="flex items-center gap-1">
-                <Link href="/wishlist" className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors group">
-                  <Heart size={22} strokeWidth={2} className="text-slate-700 dark:text-slate-300 group-hover:text-red-500 transition-colors" />
+                <Link href="/wishlist" className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors group" aria-label={`Wishlist${wishlistCount > 0 ? `, ${wishlistCount} items` : ''}`}>
+                  <Heart size={22} strokeWidth={2} className="text-slate-700 dark:text-slate-300 group-hover:text-red-500 transition-colors" aria-hidden="true" />
                   {wishlistCount > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-[10px] font-bold text-white bg-red-500 rounded-full ring-2 ring-white dark:ring-slate-950 shadow-sm animate-in zoom-in-50 duration-200">
+                    <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-[10px] font-bold text-white bg-red-500 rounded-full ring-2 ring-white dark:ring-slate-950 shadow-sm animate-in zoom-in-50 duration-200" aria-hidden="true">
                       {wishlistCount > 99 ? '99+' : wishlistCount}
                     </span>
                   )}
                 </Link>
 
-                <Link href="/cart" className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors group">
-                  <ShoppingCart size={22} strokeWidth={2} className="text-slate-700 dark:text-slate-300 group-hover:text-emerald-600 transition-colors" />
+                <Link href="/cart" className="relative p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors group" aria-label={`Shopping cart${cartCount > 0 ? `, ${cartCount} items` : ''}`}>
+                  <ShoppingCart size={22} strokeWidth={2} className="text-slate-700 dark:text-slate-300 group-hover:text-emerald-600 transition-colors" aria-hidden="true" />
                   {cartCount > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-[10px] font-bold text-white bg-emerald-600 rounded-full ring-2 ring-white dark:ring-slate-950 shadow-sm animate-in zoom-in-50 duration-200">
+                    <span className="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-4.5 h-4.5 px-1 text-[10px] font-bold text-white bg-emerald-600 rounded-full ring-2 ring-white dark:ring-slate-950 shadow-sm animate-in zoom-in-50 duration-200" aria-hidden="true">
                       {cartCount > 99 ? '99+' : cartCount}
                     </span>
                   )}
@@ -246,8 +249,8 @@ export default function Navbar({ className }: NavbarProps) {
               ) : (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900">
-                      <UserCircle className="h-6 w-6 text-slate-700 dark:text-slate-300" />
+                    <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900" aria-label="User menu">
+                      <UserCircle className="h-6 w-6 text-slate-700 dark:text-slate-300" aria-hidden="true" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56 rounded-2xl p-2 border-slate-100 dark:border-slate-800 shadow-xl" align="end" forceMount>

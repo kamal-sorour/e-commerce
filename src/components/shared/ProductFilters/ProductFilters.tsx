@@ -105,6 +105,8 @@ export default function ProductFilters() {
               setShowFilters(false);
             }}
             className="h-11 px-4 rounded-xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400 font-bold gap-2 shadow-sm transition-all"
+            aria-expanded={showSortMenu}
+            aria-haspopup="listbox"
           >
             <ArrowDownWideNarrow size={16} />
             <span className="hidden sm:inline">Sort:</span>{" "}
@@ -121,11 +123,13 @@ export default function ProductFilters() {
           </Button>
 
           {showSortMenu && (
-            <div className="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="absolute top-full left-0 mt-2 w-56 bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200" role="listbox" aria-label="Sort options">
               {sortOptions.map((opt) => (
                 <button
                   key={opt.value}
                   onClick={() => handleSortChange(opt.value)}
+                  role="option"
+                  aria-selected={currentSort === opt.value}
                   className={cn(
                     "w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors",
                     currentSort === opt.value
@@ -152,6 +156,7 @@ export default function ProductFilters() {
             (currentMinPrice || currentMaxPrice) &&
               "border-emerald-500 text-emerald-600 dark:text-emerald-400"
           )}
+          aria-expanded={showFilters}
         >
           <SlidersHorizontal size={16} />
           Price Range

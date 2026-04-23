@@ -81,9 +81,9 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
       </h1>
       
       <div className="flex items-center gap-3 mb-6">
-        <div className="flex text-amber-400">
+        <div className="flex text-amber-400" role="img" aria-label={`Rating: ${prod.ratingsAverage} out of 5 stars`}>
           {[...Array(5)].map((_, i) => (
-            <Star key={i} size={18} className={i < Math.round(prod.ratingsAverage) ? "fill-amber-400" : "text-slate-300 dark:text-slate-700"} />
+            <Star key={i} size={18} className={i < Math.round(prod.ratingsAverage) ? "fill-amber-400" : "text-slate-300 dark:text-slate-700"} aria-hidden="true" />
           ))}
         </div>
         <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
@@ -121,15 +121,15 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
             Quantity
           </label>
           <div className="flex items-center gap-4">
-            <div className="flex items-center bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 p-1">
-              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("dec")} disabled={quantity <= 1} className="h-10 w-10 rounded-lg">
-                <Minus size={16} />
+            <div className="flex items-center bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 p-1" role="group" aria-label="Product quantity">
+              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("dec")} disabled={quantity <= 1} className="h-10 w-10 rounded-lg" aria-label="Decrease quantity">
+                <Minus size={16} aria-hidden="true" />
               </Button>
-              <div className="w-12 text-center font-bold text-lg text-slate-900 dark:text-slate-100">
+              <div className="w-12 text-center font-bold text-lg text-slate-900 dark:text-slate-100" aria-live="polite" aria-atomic="true">
                 {quantity}
               </div>
-              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("inc")} disabled={quantity >= prod.quantity} className="h-10 w-10 rounded-lg">
-                <Plus size={16} />
+              <Button variant="ghost" size="icon" onClick={() => handleQtyChange("inc")} disabled={quantity >= prod.quantity} className="h-10 w-10 rounded-lg" aria-label="Increase quantity">
+                <Plus size={16} aria-hidden="true" />
               </Button>
             </div>
             <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
@@ -173,8 +173,8 @@ export default function ProductOverview({ prod }: ProductOverviewProps) {
           isFromProductDetails
           className="flex-1 h-12 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 hover:border-red-500 dark:hover:border-red-500 hover:text-red-500 text-slate-700 dark:text-slate-300 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors"
         />
-        <Button variant="outline" size="icon" className="h-12 w-12 rounded-xl border-2 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400">
-          <Share2 size={20} />
+        <Button variant="outline" size="icon" className="h-12 w-12 rounded-xl border-2 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400" aria-label="Share this product">
+          <Share2 size={20} aria-hidden="true" />
         </Button>
       </div>
 

@@ -89,9 +89,17 @@ export default function RootLayout({
       </head>
       <body className="antialiased font-exo">
         <Providers>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-emerald-600 focus:text-white focus:rounded-xl focus:font-bold focus:shadow-xl focus:outline-none focus:ring-4 focus:ring-emerald-400/50 transition-all"
+          >
+            Skip to main content
+          </a>
           <Navbar />
           <Toaster position="top-right" />
-          {children}
+          <div id="main-content">
+            {children}
+          </div>
           <Footer />
         </Providers>
       </body>
